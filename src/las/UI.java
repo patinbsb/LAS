@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *
  */
 package las;
 
@@ -18,6 +16,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Patrick Goodson
  */
+
 public class UI extends javax.swing.JFrame
 {
 
@@ -86,7 +85,8 @@ public class UI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanelMain = new javax.swing.JPanel();
         jPanelLogin = new javax.swing.JPanel();
@@ -111,16 +111,16 @@ public class UI extends javax.swing.JFrame
         jPanelReportsManager = new javax.swing.JPanel();
         jLabelReportsManager = new javax.swing.JLabel();
         jButtonExport = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jButtonLogout1 = new javax.swing.JButton();
         jPanelCataloguer = new javax.swing.JPanel();
         jLabelCataloguer = new javax.swing.JLabel();
         jButtonLogout2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jList2 = new javax.swing.JList<String>();
         jTextFieldSearch2 = new javax.swing.JTextField();
         jButtonSearch2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jButtonAdd = new javax.swing.JButton();
         jButtonRemove = new javax.swing.JButton();
         jButtonChange = new javax.swing.JButton();
@@ -129,16 +129,16 @@ public class UI extends javax.swing.JFrame
         jLabelIssuer = new javax.swing.JLabel();
         jButtonLogout3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        jList3 = new javax.swing.JList<String>();
         jButtonSearch3 = new javax.swing.JButton();
         jTextFieldSearch3 = new javax.swing.JTextField();
         jButtonIssue = new javax.swing.JButton();
         jPanelExternalUser = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        jList4 = new javax.swing.JList<String>();
         jButtonLogout4 = new javax.swing.JButton();
         jTextFieldSearch4 = new javax.swing.JTextField();
         jButtonSearch4 = new javax.swing.JButton();
@@ -149,7 +149,8 @@ public class UI extends javax.swing.JFrame
 
         jLabelUserHint.setText("Select user type:");
 
-        jListUsers.setModel(new javax.swing.AbstractListModel() {
+        jListUsers.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Systen Admin", "Reports Manager", "Cataloguer", "Issuer", "External User" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -160,8 +161,10 @@ public class UI extends javax.swing.JFrame
         jLabelPasswordHint.setText("Password:");
 
         jButtonLogin.setText("Log In");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLoginActionPerformed(evt);
             }
         });
@@ -213,7 +216,8 @@ public class UI extends javax.swing.JFrame
 
         jButtonChangePrivilege.setText("Change member");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jList1.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -225,8 +229,10 @@ public class UI extends javax.swing.JFrame
         jLabelSearchHint.setText("Search for member:");
 
         jButtonLogout.setText("Log Out");
-        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogoutActionPerformed(evt);
             }
         });
@@ -291,17 +297,21 @@ public class UI extends javax.swing.JFrame
         jLabelReportsManager.setText("Reports manager");
 
         jButtonExport.setText("Export to excel");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonExportActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
 
         jButtonLogout1.setText("Log Out");
-        jButtonLogout1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout1ActionPerformed(evt);
             }
         });
@@ -345,24 +355,29 @@ public class UI extends javax.swing.JFrame
         jLabelCataloguer.setText("Cataloguer");
 
         jButtonLogout2.setText("Log Out");
-        jButtonLogout2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout2ActionPerformed(evt);
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jList2.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane3.setViewportView(jList2);
 
         jButtonSearch2.setText("Search");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox2ActionPerformed(evt);
             }
         });
@@ -392,12 +407,11 @@ public class UI extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(jPanelCataloguerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonLogout2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelCataloguerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButtonRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelCataloguerLayout.setVerticalGroup(
@@ -431,16 +445,19 @@ public class UI extends javax.swing.JFrame
         jLabelIssuer.setText("Issuer");
 
         jButtonLogout3.setText("Log Out");
-        jButtonLogout3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout3ActionPerformed(evt);
             }
         });
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+        jList3.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane4.setViewportView(jList3);
 
@@ -492,18 +509,21 @@ public class UI extends javax.swing.JFrame
 
         jLabel2.setText("Search By:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author", "Item Type" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        jList4.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane5.setViewportView(jList4);
 
         jButtonLogout4.setText("Log Out");
-        jButtonLogout4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout4ActionPerformed(evt);
             }
         });
@@ -516,38 +536,41 @@ public class UI extends javax.swing.JFrame
             jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelExternalUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelExternalUserLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldSearch4))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonLogout4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSearch4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelExternalUserLayout.createSequentialGroup()
+                        .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelExternalUserLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldSearch4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLogout4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelExternalUserLayout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(jButtonSearch4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelExternalUserLayout.setVerticalGroup(
             jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelExternalUserLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldSearch4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSearch4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                     .addGroup(jPanelExternalUserLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonLogout4)))
+                        .addComponent(jButtonLogout4))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
