@@ -24,6 +24,15 @@ public class UI extends javax.swing.JFrame
      * Creates new form UI
      */
     
+    // Object declaration
+    Cataloguer cataloguer;
+    ExternalUser externalUser;
+    Issuer issuer;
+    ReportsManager reportsManager;
+    SystemAdmin systemAdmin;
+    
+    
+    // UI config
     static DefaultListModel typeModel = new DefaultListModel();
     // Index of listModel
     static int currentSelection = 0;
@@ -133,6 +142,10 @@ public class UI extends javax.swing.JFrame
         jButtonSearch3 = new javax.swing.JButton();
         jTextFieldSearch3 = new javax.swing.JTextField();
         jButtonIssue = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<String>();
+        jTextFieldSearch5 = new javax.swing.JTextField();
         jPanelExternalUser = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -465,6 +478,12 @@ public class UI extends javax.swing.JFrame
 
         jButtonIssue.setText("Issue Item(s)");
 
+        jLabel3.setText("Staff/Student ID:");
+
+        jLabel4.setText("Search By:");
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
+
         javax.swing.GroupLayout jPanelIssuerLayout = new javax.swing.GroupLayout(jPanelIssuer);
         jPanelIssuer.setLayout(jPanelIssuerLayout);
         jPanelIssuerLayout.setHorizontalGroup(
@@ -472,11 +491,19 @@ public class UI extends javax.swing.JFrame
             .addGroup(jPanelIssuerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
                     .addGroup(jPanelIssuerLayout.createSequentialGroup()
-                        .addComponent(jLabelIssuer)
-                        .addGap(177, 177, 177)
-                        .addComponent(jTextFieldSearch3, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4))
+                        .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelIssuer)
+                            .addComponent(jLabel4))
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldSearch5, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(jTextFieldSearch3))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonSearch3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -490,14 +517,18 @@ public class UI extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIssuer)
-                    .addComponent(jButtonSearch3)
-                    .addComponent(jTextFieldSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
+                .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSearch3)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldSearch5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                    .addGroup(jPanelIssuerLayout.createSequentialGroup()
-                        .addComponent(jButtonIssue)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonIssue))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonLogout3)
                 .addContainerGap())
@@ -706,8 +737,11 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCataloguer;
     private javax.swing.JLabel jLabelIssuer;
     private javax.swing.JLabel jLabelPasswordHint;
@@ -738,6 +772,7 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JTextField jTextFieldSearch2;
     private javax.swing.JTextField jTextFieldSearch3;
     private javax.swing.JTextField jTextFieldSearch4;
+    private javax.swing.JTextField jTextFieldSearch5;
     // End of variables declaration//GEN-END:variables
 
     private void changeCard(int currentSelection)

@@ -9,7 +9,25 @@ package las;
  *
  * @author Patrick Goodson
  */
-public class SystemAdmin
+public class SystemAdmin extends Search
 {
+    public boolean addMember (Member newMember)
+    {
+        // TODO implement this method
+        return true;
+    }
+    
+    public boolean removeMember(Member newMember)
+    {
+        // TODO implement this method
+        return true;
+    }
+    
+    public boolean changeMember(Member toChange, Member newMember)
+    {
+        // TODO implement this method
+        return true;
+    }
+    
     
 }
