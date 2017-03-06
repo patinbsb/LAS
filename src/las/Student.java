@@ -19,9 +19,8 @@ public class Student {
     private int studentID;
 
     //Alvin : i'm not sure that am i right?
-    private ArrayList borrowedItems;
-    //ArrayList<String> borrowedItems = new ArrayList<>();
-    
+    private ArrayList<String> borrowedItems = new ArrayList<>();
+
     private String email;
 
     //Constructor
@@ -31,7 +30,7 @@ public class Student {
         this.borrowedItems = borrowedItems;
         this.email = email;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -66,10 +65,10 @@ public class Student {
 
     //Methods
     public void returnItem(Item book) {
-
+        //TODO your implementation here:
     }
 
     public void issueBook(Item book) {
-
+        //TODO your implementation here:
     }
 }
