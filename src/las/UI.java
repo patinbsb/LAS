@@ -25,12 +25,11 @@ public class UI extends javax.swing.JFrame
      */
     
     // Object declaration
-    Cataloguer cataloguer;
-    ExternalUser externalUser;
-    Issuer issuer;
-    ReportsManager reportsManager;
-    SystemAdmin systemAdmin;
-    
+    Cataloguer cataloguer = new Cataloguer();
+    ExternalUser externalUser = new ExternalUser();
+    Issuer issuer = new Issuer();
+    ReportsManager reportsManager = new ReportsManager();
+    SystemAdmin systemAdmin = new SystemAdmin();
     
     // UI config
     static DefaultListModel typeModel = new DefaultListModel();
@@ -133,7 +132,7 @@ public class UI extends javax.swing.JFrame
         jButtonAdd = new javax.swing.JButton();
         jButtonRemove = new javax.swing.JButton();
         jButtonChange = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxEmail = new javax.swing.JCheckBox();
         jPanelIssuer = new javax.swing.JPanel();
         jLabelIssuer = new javax.swing.JLabel();
         jButtonLogout3 = new javax.swing.JButton();
@@ -396,12 +395,19 @@ public class UI extends javax.swing.JFrame
         });
 
         jButtonAdd.setText("Add...");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonAddActionPerformed(evt);
+            }
+        });
 
         jButtonRemove.setText("Remove");
 
         jButtonChange.setText("Change");
 
-        jCheckBox1.setText("Email Users");
+        jCheckBoxEmail.setText("Email Users");
 
         javax.swing.GroupLayout jPanelCataloguerLayout = new javax.swing.GroupLayout(jPanelCataloguer);
         jPanelCataloguer.setLayout(jPanelCataloguerLayout);
@@ -423,7 +429,7 @@ public class UI extends javax.swing.JFrame
                     .addComponent(jButtonRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBoxEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -446,7 +452,7 @@ public class UI extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jButtonChange)
                         .addGap(27, 27, 27)
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBoxEmail)
                         .addGap(0, 141, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonLogout2)
@@ -668,6 +674,17 @@ public class UI extends javax.swing.JFrame
         changeCard(-1);
     }//GEN-LAST:event_jButtonLogout4ActionPerformed
 
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddActionPerformed
+    {//GEN-HEADEREND:event_jButtonAddActionPerformed
+        // Prompts user for details and creates a new item.
+        String title = JOptionPane.showInputDialog("Enter Title: ");
+        String author = JOptionPane.showInputDialog("Enter Author: ");
+        String type = JOptionPane.showInputDialog("Enter Type: ");
+        int amountLeft = Integer.parseInt(JOptionPane.showInputDialog("Enter quantity: "));
+        boolean selected = jCheckBoxEmail.isSelected();
+        cataloguer.addItem(title, author, type, amountLeft, selected);
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
   
     /**
      * @param args the command line arguments
@@ -733,7 +750,7 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JButton jButtonSearch2;
     private javax.swing.JButton jButtonSearch3;
     private javax.swing.JButton jButtonSearch4;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxEmail;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

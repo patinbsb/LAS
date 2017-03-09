@@ -26,7 +26,7 @@ public class Item{
         this.itemID = itemID;
         this.amountLeft = amountLeft;
     }
-
+    
     public String getTitle() {
         return title;
     }

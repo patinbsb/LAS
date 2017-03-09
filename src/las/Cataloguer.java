@@ -36,6 +36,17 @@ public class Cataloguer extends  Search
         return true;
     }
     
+    public void addItem (String title, String author, String type,
+            int amountLeft, boolean email)
+    {
+        ItemController.addNewItem(title, author, type, amountLeft);
+        if (email)
+        {
+            //Mail subscribers
+            EmailController.sendEmail("new item in the library: " + title);
+        }
+    }
+    
     public boolean removeSource (Source remove, boolean email)
     {
         // TODO implement this method

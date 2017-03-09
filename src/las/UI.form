@@ -395,7 +395,7 @@
                           <Component id="jButtonRemove" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButtonAdd" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButtonSearch2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jCheckBox1" max="32767" attributes="0"/>
+                          <Component id="jCheckBoxEmail" max="32767" attributes="0"/>
                           <Component id="jButtonChange" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -422,7 +422,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonChange" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxEmail" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="141" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -501,6 +501,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRemove">
               <Properties>
@@ -512,7 +515,7 @@
                 <Property name="text" type="java.lang.String" value="Change"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxEmail">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Email Users"/>
               </Properties>
