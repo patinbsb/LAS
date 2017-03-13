@@ -11,35 +11,37 @@ import java.util.ArrayList;
  */
 public abstract class Search
 {
-    public ArrayList<String> searchItems(String entry, String searchType)
+    public ArrayList<Item> searchItems(String entry, String searchType)
     {
-        ArrayList<String> results = new ArrayList<>();
-        // TODO implement this method
-        // Connect to local library system
-        // perform search
-        // results = LocaLibrary.search(String entry, String searchType);
+        ArrayList<Item> results = new ArrayList<>();
+        switch (searchType)
+        {
+            case "Title":
+                results = ItemController.getItemByTitle(entry);
+                break;
+            case "Author":
+                results = ItemController.getItemByAuthor(entry);
+                break;
+            case "Item Type":
+                results = ItemController.getItemByType(entry);
+                break;
+            default:
+                throw new IndexOutOfBoundsException("Search is not of type: "
+                + "Title, Author or Item Type");
+        }
         return results;
     }
     
-    public ArrayList<String> searchUsersByName(String name)
+    public ArrayList<Member> searchMemberByName(String name)
     {
-        ArrayList<String> results = new ArrayList<>();
-        // TODO implement this method
-        // Connect to Staff AND student info systems
-        // Perform search
-        // results = StaffInfo.searchName(String name)
-        return results;
+        ArrayList<Member> memberResults = MemberController.getMemberByName(name);
+        return memberResults;
     }
     
-    public String searchUserByID(int ID)
+    public Member searchMemberByID(int ID)
     {
-        // TODO abstract user required
-        String results = "Not finished";
-        // TODO implement this method
-        // Connect to Staff AND student info systems
-        // Perform search
-        // results = StaffInfo.searchID(int ID)
-        return results;
+        Member member = MemberController.getMemberByID(ID);
+        return member;
     }
     
     public Source getSourceByID(int ID)
