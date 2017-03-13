@@ -34,6 +34,7 @@ public class UI extends javax.swing.JFrame
     
     // UI config
     static DefaultListModel typeModel = new DefaultListModel();
+    static DefaultListModel issuerModel = new DefaultListModel();
     // Index of listModel
     static int currentSelection = 0;
     public static CardLayout card = new CardLayout();
@@ -50,6 +51,8 @@ public class UI extends javax.swing.JFrame
         typeModel.addElement("Issuer");
         typeModel.addElement("External User");
         jListUsers.setModel(typeModel);
+        
+        jList3.setModel(issuerModel);
         
         // Create a listener for when the user changes a selection in the list
         jListUsers.addListSelectionListener(new ListSelectionListener()
@@ -453,11 +456,6 @@ public class UI extends javax.swing.JFrame
             }
         });
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(jList3);
 
@@ -686,10 +684,10 @@ public class UI extends javax.swing.JFrame
     }//GEN-LAST:event_jButtonSearch4ActionPerformed
 
     private void jButtonIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIssueActionPerformed
-        if (jList3.getSelectedIndex() != -1)
+        int index = jList3.getSelectedIndex();
+        if (index != -1)
         {
-            //Item item = jList3.getSelectedValue();
-            Item item = null;
+            Item item = issuer.getItemList().get(index);
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
             issuer.Issue(userID, item);
         }
@@ -699,6 +697,13 @@ public class UI extends javax.swing.JFrame
         String searchType = (String) jComboBox4.getSelectedItem();
         String entry = jTextFieldSearch5.getText();
         ArrayList<Item> itemList = issuer.searchItems(entry, searchType);
+        issuer.setItemList(itemList);
+        issuerModel.clear();
+        for (Item item : itemList)
+        {
+            issuerModel.addElement("Title: " + item.getTitle() + " Author: " +
+                    item.getAuthor()+ " Type: " + item.getType());
+        }
         
     }//GEN-LAST:event_jButtonSearch3ActionPerformed
 
@@ -785,7 +790,7 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JLabel jLabelUserHint;
     private javax.swing.JList jList1;
     private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
+    private javax.swing.JList<Item> jList3;
     private javax.swing.JList<String> jList4;
     private javax.swing.JList jListUsers;
     private javax.swing.JPanel jPanelCataloguer;
