@@ -81,41 +81,55 @@ public class ItemController
         }
     }
     
-    public static Item getItemByTitle(String title)
+    public static ArrayList<Item> getItemByTitle(String title)
     {
+        ArrayList<Item> results = new ArrayList<>();
         for (Item item : itemList)
         {
             if (item.getTitle().equals(title))
             {
-                return item;
+                results.add(item);
             }
         }
-        return null;
+        return results;
     }
     
-    public static Item getItemByAuthor(String author)
+    public static ArrayList<Item> getItemByAuthor(String author)
     {
+        ArrayList<Item> results = new ArrayList<>();
         for (Item item : itemList)
         {
             if (item.getAuthor().equals(author))
             {
-                return item;
+                results.add(item);
             }
         }
-        return null;
+        return results;
     }
     
-    public static Item getItemByType(String type)
+    public static ArrayList<Item> getItemByType(String type)
     {
+        ArrayList<Item> results = new ArrayList<>();
         for (Item item : itemList)
         {
             if (item.getType().equals(type))
+            {
+                results.add(item);
+            }
+        }
+        return results;
+    }
+    
+    public static Item getItemByID(int ID)
+    {
+        for (Item item : itemList)
+        {
+            if (item.getItemID() == ID)
             {
                 return item;
             }
         }
         return null;
     }
-    
     
 }

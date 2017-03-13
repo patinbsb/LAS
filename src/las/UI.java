@@ -5,6 +5,7 @@ package las;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -461,6 +462,11 @@ public class UI extends javax.swing.JFrame
         jScrollPane4.setViewportView(jList3);
 
         jButtonSearch3.setText("Search");
+        jButtonSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearch3ActionPerformed(evt);
+            }
+        });
 
         jButtonIssue.setText("Issue Item(s)");
         jButtonIssue.addActionListener(new java.awt.event.ActionListener() {
@@ -682,12 +688,19 @@ public class UI extends javax.swing.JFrame
     private void jButtonIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIssueActionPerformed
         if (jList3.getSelectedIndex() != -1)
         {
-            //String item = jList3.getSelectedValue();
-            // TODO: return an item
+            //Item item = jList3.getSelectedValue();
+            Item item = null;
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
-            //issuer.Issue(userID, item);
+            issuer.Issue(userID, item);
         }
     }//GEN-LAST:event_jButtonIssueActionPerformed
+
+    private void jButtonSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearch3ActionPerformed
+        String searchType = (String) jComboBox4.getSelectedItem();
+        String entry = jTextFieldSearch5.getText();
+        ArrayList<Item> itemList = issuer.searchItems(entry, searchType);
+        
+    }//GEN-LAST:event_jButtonSearch3ActionPerformed
 
   
     /**
