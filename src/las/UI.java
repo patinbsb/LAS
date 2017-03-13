@@ -682,9 +682,10 @@ public class UI extends javax.swing.JFrame
     private void jButtonIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIssueActionPerformed
         if (jList3.getSelectedIndex() != -1)
         {
-            String item = jList3.getSelectedValue();
+            //String item = jList3.getSelectedValue();
+            // TODO: return an item
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
-            issuer.Issue(userID, item);
+            //issuer.Issue(userID, item);
         }
     }//GEN-LAST:event_jButtonIssueActionPerformed
 
