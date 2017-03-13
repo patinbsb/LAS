@@ -579,13 +579,18 @@
                           <Component id="jComboBox4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldSearch5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" min="-2" pref="197" max="-2" attributes="0"/>
-                          <Component id="jButtonIssue" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonLogout3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane4" pref="258" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonLogout3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jButtonIssue" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -594,7 +599,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelIssuer">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Issuer"/>
+                <Property name="text" type="java.lang.String" value="Issuee"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonLogout3">
@@ -623,6 +628,7 @@
                         <StringItem index="4" value="Item 5"/>
                       </StringArray>
                     </Property>
+                    <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -641,6 +647,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Issue Item(s)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonIssueActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -796,6 +805,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSearch4ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -31,9 +31,9 @@ public abstract class Search
         return results;
     }
     
-    public ArrayList<String> searchUsersByID(int ID)
+    public String searchUserByID(int ID)
     {
-        ArrayList<String> results = new ArrayList<>();
+        String results = "Not finished";
         // TODO implement this method
         // Connect to Staff AND student info systems
         // Perform search

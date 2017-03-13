@@ -9,7 +9,7 @@ package las;
  */
 public class Issuer extends Search
 {
-    public boolean Issue(int ID)
+    public void Issue(int ID, Item item)
     {
         //TODO Implement this method
         // Connect to staff + student database
@@ -19,6 +19,8 @@ public class Issuer extends Search
         // return true
         // else
         // return false
-        return true;
+        Object user = searchUserByID(ID);
+        //user.issueBook();
+        
     }
 }
