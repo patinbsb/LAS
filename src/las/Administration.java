@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author alvinho0304
  */
-public class Administration {
+public class Administration extends Search {
 
     //Attributes
     String sqlurl = "";
