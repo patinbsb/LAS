@@ -112,26 +112,32 @@ public class UI extends javax.swing.JFrame
         jButtonAddMember = new javax.swing.JButton();
         jButtonRemoveMember = new javax.swing.JButton();
         jButtonChangePrivilege = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         jTextFieldSearch = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jLabelSearchHint = new javax.swing.JLabel();
         jButtonLogout = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jSeparator4 = new javax.swing.JSeparator();
+        staffdLabel = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        studentdLabel = new javax.swing.JLabel();
         jPanelReportsManager = new javax.swing.JPanel();
         jLabelReportsManager = new javax.swing.JLabel();
         jButtonExport = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jButtonLogout1 = new javax.swing.JButton();
         jPanelCataloguer = new javax.swing.JPanel();
         jLabelCataloguer = new javax.swing.JLabel();
         jButtonLogout2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jList2 = new javax.swing.JList<String>();
         jTextFieldSearch2 = new javax.swing.JTextField();
         jButtonSearch2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jButtonAdd = new javax.swing.JButton();
         jButtonRemove = new javax.swing.JButton();
         jButtonChange = new javax.swing.JButton();
@@ -140,20 +146,20 @@ public class UI extends javax.swing.JFrame
         jLabelIssuer = new javax.swing.JLabel();
         jButtonLogout3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        jList3 = new javax.swing.JList<Item>();
         jButtonSearch3 = new javax.swing.JButton();
         jTextFieldSearch3 = new javax.swing.JTextField();
         jButtonIssue = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<String>();
         jTextFieldSearch5 = new javax.swing.JTextField();
         jPanelExternalUser = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        jList4 = new javax.swing.JList<String>();
         jButtonLogout4 = new javax.swing.JButton();
         jTextFieldSearch4 = new javax.swing.JTextField();
         jButtonSearch4 = new javax.swing.JButton();
@@ -220,20 +226,14 @@ public class UI extends javax.swing.JFrame
 
         jPanelMain.add(jPanelLogin, "-1");
 
-        jLabelSysAdmin.setText("System Administrator");
+        jLabelSysAdmin.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabelSysAdmin.setText("System Administrator Page");
 
-        jButtonAddMember.setText("Add member");
+        jButtonAddMember.setText("Add a new member");
 
-        jButtonRemoveMember.setText("Remove member");
+        jButtonRemoveMember.setText("Remove a member from list");
 
-        jButtonChangePrivilege.setText("Change member");
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        jButtonChangePrivilege.setText("Change a staff privilege");
 
         jButtonSearch.setText("Search Member");
 
@@ -246,6 +246,66 @@ public class UI extends javax.swing.JFrame
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Staff ID", "Staff Name", "Staff Privilege"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(300);
+        }
+
+        staffdLabel.setText("Staff details:");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Student ID", "Student Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(300);
+        }
+
+        studentdLabel.setText("Student details:");
+
         javax.swing.GroupLayout jPanelSysAdminLayout = new javax.swing.GroupLayout(jPanelSysAdmin);
         jPanelSysAdmin.setLayout(jPanelSysAdminLayout);
         jPanelSysAdminLayout.setHorizontalGroup(
@@ -253,51 +313,76 @@ public class UI extends javax.swing.JFrame
             .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                        .addComponent(jLabelSearchHint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(177, 177, 177))
+                    .addComponent(jLabelSearchHint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                         .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelSysAdmin)
+                            .addComponent(jSeparator4)
                             .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, Short.MAX_VALUE)))
-                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAddMember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonRemoveMember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonChangePrivilege, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
-                .addContainerGap())
+                                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jSeparator2)
+                                        .addComponent(jSeparator3)
+                                        .addComponent(jLabelSysAdmin, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
+                                            .addComponent(jButtonAddMember)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jButtonRemoveMember)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jButtonChangePrivilege))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
+                                            .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(staffdLabel))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(studentdLabel)
+                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanelSysAdminLayout.createSequentialGroup()
+                                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanelSysAdminLayout.setVerticalGroup(
             jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(jLabelSysAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSearchHint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonSearch)
-                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(staffdLabel)
+                    .addComponent(studentdLabel))
                 .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAddMember)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonRemoveMember)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonChangePrivilege)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addComponent(jButtonLogout))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddMember)
+                    .addComponent(jButtonRemoveMember)
+                    .addComponent(jButtonChangePrivilege))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelSearchHint, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSearch))
+                .addGap(60, 60, 60)
+                .addComponent(jButtonLogout)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelMain.add(jPanelSysAdmin, "0");
@@ -312,7 +397,7 @@ public class UI extends javax.swing.JFrame
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
 
         jButtonLogout1.setText("Log Out");
         jButtonLogout1.addActionListener(new java.awt.event.ActionListener() {
@@ -366,16 +451,16 @@ public class UI extends javax.swing.JFrame
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane3.setViewportView(jList2);
 
         jButtonSearch2.setText("Search");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -477,7 +562,7 @@ public class UI extends javax.swing.JFrame
 
         jLabel4.setText("Search By:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author", "Item Type" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
 
         javax.swing.GroupLayout jPanelIssuerLayout = new javax.swing.GroupLayout(jPanelIssuer);
         jPanelIssuer.setLayout(jPanelIssuerLayout);
@@ -538,12 +623,12 @@ public class UI extends javax.swing.JFrame
 
         jLabel2.setText("Search By:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author", "Item Type" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        jList4.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane5.setViewportView(jList4);
 
@@ -788,7 +873,6 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JLabel jLabelSearchHint;
     private javax.swing.JLabel jLabelSysAdmin;
     private javax.swing.JLabel jLabelUserHint;
-    private javax.swing.JList jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JList<Item> jList3;
     private javax.swing.JList<String> jList4;
@@ -802,16 +886,23 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JPanel jPanelSysAdmin;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JTextField jTextFieldSearch2;
     private javax.swing.JTextField jTextFieldSearch3;
     private javax.swing.JTextField jTextFieldSearch4;
     private javax.swing.JTextField jTextFieldSearch5;
+    private javax.swing.JLabel staffdLabel;
+    private javax.swing.JLabel studentdLabel;
     // End of variables declaration//GEN-END:variables
 
     private void changeCard(int currentSelection)
