@@ -838,15 +838,19 @@ public class UI extends javax.swing.JFrame
     }//GEN-LAST:event_jButtonIssueActionPerformed
 
     private void jButtonSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearch3ActionPerformed
-        String searchType = (String) jComboBox4.getSelectedItem();
-        String entry = jTextFieldSearch5.getText();
-        ArrayList<Item> itemList = issuer.searchItems(entry, searchType);
-        issuer.setItemList(itemList);
-        issuerModel.clear();
-        for (Item item : itemList)
-        {
-            issuerModel.addElement("Title: " + item.getTitle() + " Author: " +
-                    item.getAuthor()+ " Type: " + item.getType());
+        try {
+            String searchType = (String) jComboBox4.getSelectedItem();
+            String entry = jTextFieldSearch5.getText();
+            ArrayList<Item> itemList = issuer.searchItems(entry, searchType);
+            issuer.setItemList(itemList);
+            issuerModel.clear();
+            for (Item item : itemList)
+            {
+                issuerModel.addElement("Title: " + item.getTitle() + " Author: " +
+                        item.getAuthor()+ " Type: " + item.getType());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButtonSearch3ActionPerformed
