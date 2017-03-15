@@ -3,6 +3,8 @@
  */
 package las;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Patrick Goodson
@@ -37,7 +39,7 @@ public class Cataloguer extends  Search
     }
     
     public void addItem (String title, String author, String type,
-            int amountLeft, boolean email)
+            int amountLeft, boolean email) throws SQLException
     {
         ItemController.addNewItem(title, author, type, amountLeft);
         if (email)

@@ -5,7 +5,10 @@ package las;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -39,8 +42,11 @@ public class UI extends javax.swing.JFrame
     static int currentSelection = 0;
     public static CardLayout card = new CardLayout();
     
-    public UI()
+    public UI() throws ClassNotFoundException, SQLException
     {
+        // Connect to the SQL database
+        DBConnector.connect();
+        
         initComponents();
         card = (CardLayout) jPanelMain.getLayout();
         this.getRootPane().setDefaultButton(jButtonLogin);
@@ -97,7 +103,8 @@ public class UI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanelMain = new javax.swing.JPanel();
         jPanelLogin = new javax.swing.JPanel();
@@ -170,7 +177,8 @@ public class UI extends javax.swing.JFrame
 
         jLabelUserHint.setText("Select user type:");
 
-        jListUsers.setModel(new javax.swing.AbstractListModel() {
+        jListUsers.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Systen Admin", "Reports Manager", "Cataloguer", "Issuer", "External User" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -181,8 +189,10 @@ public class UI extends javax.swing.JFrame
         jLabelPasswordHint.setText("Password:");
 
         jButtonLogin.setText("Log In");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLoginActionPerformed(evt);
             }
         });
@@ -240,33 +250,41 @@ public class UI extends javax.swing.JFrame
         jLabelSearchHint.setText("Search for member:");
 
         jButtonLogout.setText("Log Out");
-        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogoutActionPerformed(evt);
             }
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Staff ID", "Staff Name", "Staff Privilege"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane6.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
+        if (jTable1.getColumnModel().getColumnCount() > 0)
+        {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
@@ -278,26 +296,32 @@ public class UI extends javax.swing.JFrame
         staffdLabel.setText("Staff details:");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null},
                 {null, null},
                 {null, null},
                 {null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Student ID", "Student Name"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane7.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
+        if (jTable2.getColumnModel().getColumnCount() > 0)
+        {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
@@ -391,8 +415,10 @@ public class UI extends javax.swing.JFrame
         jLabelReportsManager.setText("Reports manager");
 
         jButtonExport.setText("Export to excel");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonExportActionPerformed(evt);
             }
         });
@@ -400,8 +426,10 @@ public class UI extends javax.swing.JFrame
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
 
         jButtonLogout1.setText("Log Out");
-        jButtonLogout1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout1ActionPerformed(evt);
             }
         });
@@ -445,13 +473,16 @@ public class UI extends javax.swing.JFrame
         jLabelCataloguer.setText("Cataloguer");
 
         jButtonLogout2.setText("Log Out");
-        jButtonLogout2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout2ActionPerformed(evt);
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        jList2.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -461,15 +492,19 @@ public class UI extends javax.swing.JFrame
         jButtonSearch2.setText("Search");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
         jButtonAdd.setText("Add...");
-        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonAddActionPerformed(evt);
             }
         });
@@ -535,8 +570,10 @@ public class UI extends javax.swing.JFrame
         jLabelIssuer.setText("Issuee");
 
         jButtonLogout3.setText("Log Out");
-        jButtonLogout3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout3ActionPerformed(evt);
             }
         });
@@ -545,15 +582,19 @@ public class UI extends javax.swing.JFrame
         jScrollPane4.setViewportView(jList3);
 
         jButtonSearch3.setText("Search");
-        jButtonSearch3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSearch3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSearch3ActionPerformed(evt);
             }
         });
 
         jButtonIssue.setText("Issue Item(s)");
-        jButtonIssue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonIssue.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonIssueActionPerformed(evt);
             }
         });
@@ -563,6 +604,13 @@ public class UI extends javax.swing.JFrame
         jLabel4.setText("Search By:");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelIssuerLayout = new javax.swing.GroupLayout(jPanelIssuer);
         jPanelIssuer.setLayout(jPanelIssuerLayout);
@@ -625,7 +673,8 @@ public class UI extends javax.swing.JFrame
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
 
-        jList4.setModel(new javax.swing.AbstractListModel() {
+        jList4.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -633,15 +682,19 @@ public class UI extends javax.swing.JFrame
         jScrollPane5.setViewportView(jList4);
 
         jButtonLogout4.setText("Log Out");
-        jButtonLogout4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout4ActionPerformed(evt);
             }
         });
 
         jButtonSearch4.setText("Search");
-        jButtonSearch4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSearch4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSearch4ActionPerformed(evt);
             }
         });
@@ -761,7 +814,13 @@ public class UI extends javax.swing.JFrame
         String type = JOptionPane.showInputDialog("Enter Type: ");
         int amountLeft = Integer.parseInt(JOptionPane.showInputDialog("Enter quantity: "));
         boolean selected = jCheckBoxEmail.isSelected();
-        cataloguer.addItem(title, author, type, amountLeft, selected);
+        try
+        {
+            cataloguer.addItem(title, author, type, amountLeft, selected);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonSearch4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearch4ActionPerformed
@@ -791,6 +850,11 @@ public class UI extends javax.swing.JFrame
         }
         
     }//GEN-LAST:event_jButtonSearch3ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox4ActionPerformed
+    {//GEN-HEADEREND:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
   
     /**
@@ -833,7 +897,16 @@ public class UI extends javax.swing.JFrame
         {
             public void run()
             {
-                new UI().setVisible(true);
+                try
+                {
+                    new UI().setVisible(true);
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex)
+                {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

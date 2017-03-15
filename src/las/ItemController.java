@@ -3,6 +3,7 @@
  */
 package las;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,12 +16,19 @@ public class ItemController
     static ArrayList<Item> itemList = new ArrayList<>();
     static int currentItemID = 0;
 
-    private ItemController()
+    private static void getItemTable() throws SQLException
+    {
+        itemList = DBConnector.getItemTable();
+    }
+    
+    
+
+    private ItemController() throws SQLException
     {
     }
     
     // Using singleton pattern as we only want 1 item controller instance
-    public static ItemController getInstance()
+    public static ItemController getInstance() throws SQLException
     {
         if (itemController == null)
         {
@@ -30,10 +38,10 @@ public class ItemController
     }
     
     
-    public static void addNewItem (String title, String author, String type, int amountLeft)
+    public static void addNewItem (String title, String author, String type, int amountLeft) throws SQLException
     {
         Item newItem = new Item(title, author, type, currentItemID, amountLeft);
-        itemList.add(newItem);
+        DBConnector.insertItemIntoTable(newItem);
         currentItemID++;
     }
     
@@ -81,9 +89,10 @@ public class ItemController
         }
     }
     
-    public static ArrayList<Item> getItemByTitle(String title)
+    public static ArrayList<Item> getItemByTitle(String title) throws SQLException
     {
         ArrayList<Item> results = new ArrayList<>();
+        getItemTable();
         for (Item item : itemList)
         {
             if (item.getTitle().equals(title))
@@ -94,9 +103,10 @@ public class ItemController
         return results;
     }
     
-    public static ArrayList<Item> getItemByAuthor(String author)
+    public static ArrayList<Item> getItemByAuthor(String author) throws SQLException
     {
         ArrayList<Item> results = new ArrayList<>();
+        getItemTable();
         for (Item item : itemList)
         {
             if (item.getAuthor().equals(author))
@@ -107,9 +117,10 @@ public class ItemController
         return results;
     }
     
-    public static ArrayList<Item> getItemByType(String type)
+    public static ArrayList<Item> getItemByType(String type) throws SQLException
     {
         ArrayList<Item> results = new ArrayList<>();
+        getItemTable();
         for (Item item : itemList)
         {
             if (item.getType().equals(type))
@@ -120,8 +131,9 @@ public class ItemController
         return results;
     }
     
-    public static Item getItemByID(int ID)
+    public static Item getItemByID(int ID) throws SQLException
     {
+        getItemTable();
         for (Item item : itemList)
         {
             if (item.getItemID() == ID)

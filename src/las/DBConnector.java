@@ -6,13 +6,25 @@
 package las;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author alvinho0304
  */
-public class DBConnector {
-
+public class DBConnector
+{
+    public static DBConnector dbConnector;
+    
+    public static DBConnector getInstance() throws ClassNotFoundException, SQLException
+    {
+        if(dbConnector == null)
+        {
+            dbConnector = new DBConnector();
+        }
+        return dbConnector;
+    }
+    
     //Database name
     private static final String db_name = "LAS";
 
@@ -24,30 +36,68 @@ public class DBConnector {
     private static final String DRIVER = "org.apache.derby.jdbc.ClientDriver";
     private static final String JDBC_URL = "jdbc:derby://localhost:1527/" + db_name + ";create=true";
 
-    Connection conn = null;
-
-    //DO NOT MODIFT THIS OPERATION!!!
-    public DBConnector() throws SQLException, ClassNotFoundException {
+    static Connection conn = null;
+    
+    //DO NOT MODIFY THIS OPERATION!!!
+    private DBConnector() throws SQLException, ClassNotFoundException
+    {
+    }
+    
+    public static void connect() throws ClassNotFoundException, SQLException
+    {
         Class.forName(DRIVER);
-        this.conn = DriverManager.getConnection(JDBC_URL, USER, PW);
-        if (this.conn != null) {
+        DBConnector.conn = DriverManager.getConnection(JDBC_URL, USER, PW);
+        if (DBConnector.conn != null)
+        {
             System.out.println("Connected to LAS Database");
         }
     }
 
-    //DO NOT MODIFT THIS OPERATION!!!
-    public void createTable(String type, String details) throws SQLException {
+    //DO NOT MODIFY THIS OPERATION!!!
+    public static void createTable(String type, String details) throws SQLException
+    {
         String data = "CREATE TABLE " + type + "(" + details + ")";
         PreparedStatement pt = conn.prepareStatement(data);
         pt.executeUpdate();
     }
 
-    //DO NOT MODIFT THIS OPERATION!!!
-    public void insertIntoTable(String type, String details) throws SQLException {
-        String data = "INSERT INTO " + type + " Values (" + details + ")";
+    
+    public static void insertItemIntoTable(Item item) throws SQLException
+    {
+        String data = "INSERT INTO Items(title, author, type, amountleft)"
+                + "Values (?,?,?,?)";
         PreparedStatement pt = conn.prepareStatement(data);
+        pt.setString(1, item.getTitle());
+        pt.setString(2, item.getAuthor());
+        pt.setString(3, item.getType());
+        pt.setInt(4, item.getAmountLeft());
         pt.executeUpdate();
     }
-
-    //Implementing your own operation with SQL Table below
+    
+    public static ArrayList<Item> getItemTable() throws SQLException
+    {
+        ArrayList<Item> table = new ArrayList<>();
+        String data = "SELECT * FROM Items";
+        PreparedStatement pt = conn.prepareStatement(data);
+        ResultSet rs = pt.executeQuery();
+        while(rs.next())
+        {
+            table.add(new Item(rs.getString("title"), rs.getString("author"),
+                    rs.getString("type"), rs.getInt("ItemID"), rs.getInt("amountleft")));
+        }
+        
+        return table;
+    }
+    
+    public static void insertMemberIntoTable(Member member) throws SQLException
+    {
+        String data = "INSERT INTO MEMBERS(NAME,EMAIL,PRIVILEGE,ISSTAFF)"
+                + "Values (?,?,?,?)";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setString(1, member.getName());
+        pt.setString(2, member.getEmail());
+        pt.setInt(3, member.getPrivilege());
+        pt.setBoolean(4, member.isIsStaff());
+        pt.executeUpdate();
+    }
 }
