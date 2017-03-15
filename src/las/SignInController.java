@@ -9,22 +9,20 @@ package las;
  *
  * @author Patrick Goodson
  */
-public class SignInController
-{
+public class SignInController {
+
     static private int userType;
     static private String password;
 
-    public SignInController(int userType, String password)
-    {
+    public SignInController(int userType, String password) {
         SignInController.userType = userType;
         SignInController.password = password;
     }
-    
-    public boolean Authenticate()
-    {
+
+    public boolean Authenticate() {
         //TODO Load passwords from user config file?
-        switch(userType)
-        {
+
+        switch (userType) {
             case 0:
                 if (password.equals("system admin"))// Sys admin
                 {
@@ -38,22 +36,23 @@ public class SignInController
                 }
                 break;
             case 2:
-                if(password.equals("cataloguer")) // Cataloguer
+                if (password.equals("cataloguer")) // Cataloguer
                 {
                     return true;
                 }
                 break;
             case 3:
-                if(password.equals("issuer")) // Issuer
+                if (password.equals("issuer")) // Issuer
                 {
                     return true;
                 }
                 break;
             case 4:
                 return true;
-            default: return false;
+            default:
+                return false;
         }
         return false;
-        
+
     }
 }
