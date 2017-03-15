@@ -63,10 +63,17 @@ public class DBConnector {
     }
 
     //DO NOT MODIFY THIS OPERATION!!!
-    public static void createTable(String type, String details) throws SQLException {
-        String data = "CREATE TABLE " + type + "(" + details + ")";
-        PreparedStatement pt = conn.prepareStatement(data);
-        pt.executeUpdate();
+    public static void createTable(String tableName, String details) throws SQLException {
+        DatabaseMetaData dbmd = conn.getMetaData();
+        ResultSet rs = dbmd.getTables(null, "LAS", tableName, null);
+        
+        if (!rs.next()) {
+            String data = "CREATE TABLE " + tableName + "(" + details + ")";
+            PreparedStatement pt = conn.prepareStatement(data);
+            pt.executeUpdate();
+        } else{
+            System.out.println(tableName + " already existed in LAS Database");
+        }
     }
 
     public static void insertItemIntoTable(Item item) throws SQLException {
@@ -156,7 +163,7 @@ public class DBConnector {
 
             final int batchSize = 1000;
             int count = 0;
-            Date date = null;
+            java.util.Date date = null;
             while ((nextLine = csvReader.readNext()) != null) {
 
                 if (null != nextLine) {
