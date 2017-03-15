@@ -3,6 +3,7 @@
  */
 package las;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class Search
 {
-    public ArrayList<Item> searchItems(String entry, String searchType)
+    public ArrayList<Item> searchItems(String entry, String searchType) throws SQLException
     {
         ArrayList<Item> results = new ArrayList<>();
         switch (searchType)
