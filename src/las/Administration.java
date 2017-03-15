@@ -5,10 +5,8 @@
  */
 package las;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +27,7 @@ public class Administration extends Search {
              * else connect to student info system Add a new member into
              * corresponding info system
              */
-            
+
             //Connect to the SQL Databases
             Connection con = DriverManager.getConnection(sqlurl, "", "");
             Statement st = con.createStatement();
@@ -38,7 +36,7 @@ public class Administration extends Search {
                 //Do the fuctionality of adding new staff into SQL file
                 //st.executeUpdate();
             } else {
-                
+
                 //Do the fuctionality of adding new student into SQL file
                 //st.executeUpdate();
             }
@@ -52,10 +50,10 @@ public class Administration extends Search {
             /**
              * If Object mData belongs to a staff, connect to staff info system;
              * else connect to student info system; Create for loop for
-             * corresponding member type of arraylist if (listdata = mData) remove
-             * member;
+             * corresponding member type of arraylist if (listdata = mData)
+             * remove member;
              */
-            
+
             //Connect to the SQL Databases
             Connection con = DriverManager.getConnection(sqlurl, "", "");
             Statement st = con.createStatement();
@@ -64,7 +62,7 @@ public class Administration extends Search {
                 //Do the fuctionality of remove staff into SQL file
                 //st.executeUpdate();
             } else {
-                
+
                 //Do the fuctionality of remove student into SQL file
                 //st.executeUpdate();
             }
@@ -78,10 +76,10 @@ public class Administration extends Search {
             /**
              * If Object mData belongs to a staff, connect to staff info system;
              * else connect to student info system; Create for loop for
-             * corresponding member type of arraylist if(listdata = mData) change
-             * privilege of member with value stored in mChange;
+             * corresponding member type of arraylist if(listdata = mData)
+             * change privilege of member with value stored in mChange;
              */
-            
+
             //Connect to the SQL Databases
             Connection con = DriverManager.getConnection(sqlurl, "", "");
             Statement st = con.createStatement();
@@ -90,7 +88,7 @@ public class Administration extends Search {
                 //Do the fuctionality of change privilege staff into SQL file
                 //st.executeUpdate();
             } else {
-                
+
                 //Do the fuctionality of adding new student into SQL file
                 //st.executeUpdate();
             }
