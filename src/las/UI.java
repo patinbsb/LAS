@@ -690,23 +690,29 @@ public class UI extends javax.swing.JFrame {
                 new String(jPasswordField.getPassword()));
         if (signIn.Authenticate()) {
 
-            //if user is system admin, preload data before change panel
+            //if user is system admin [[[or other system]]], preload data before change panel
             if (jListUsers.getSelectedValue().equals("System Admin")) {
                 try {
-                    DBConnector.createTable("STUDENTS", "Student_ID VARCHAR(255), Student_Name VARCHAR(255)");
-                    DBConnector db = DBConnector.getInstance();
-                    db.setSeprator(',');
-                    db.loadCSVIntoTable("src/resources/Students.csv", "STUDENTS", true);
-                    System.out.println("Data inserted into STUDENTS table");
-                    
+                    DBConnector.createTable("MEMBERS", "MEMBER_ID INT NOT NULL, "
+                            + "NAME VARCHAR(255), "
+                            + "EMAIL VARCHAR(255), "
+                            + "PRIVILEGE VARCHAR(255), "
+                            + "ISSTAFF INT NOT NULL, "
+                            + "PRIMARY KEY (MEMBER_ID)");
+                    DBConnector.setSeprator(',');
+                    DBConnector.loadCSVIntoTable("src/resources/members.csv", "MEMBERS", true);
+                    System.out.println("Data inserted into MEMBERS table");
+
+                    ArrayList<Member> mlist = DBConnector.getMemberTableIntoList();
                     DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
+                    mTable.setRowCount(0);
                     Object[] data = new Object[5];
-                    for (int i = 0; i < MemberController.memberList.size(); i++) {
-                        data[0] = MemberController.memberList.get(i).getID();
-                        data[1] = MemberController.memberList.get(i).getName();
-                        data[2] = MemberController.memberList.get(i).getEmail();
-                        data[3] = MemberController.memberList.get(i).getPrivilege();
-                        data[4] = MemberController.memberList.get(i).isIsStaff();
+                    for (int i = 0; i < mlist.size(); i++) {
+                        data[0] = mlist.get(i).getID();
+                        data[1] = mlist.get(i).getName();
+                        data[2] = mlist.get(i).getEmail();
+                        data[3] = mlist.get(i).getPrivilege();
+                        data[4] = mlist.get(i).isIsStaff();
 
                         mTable.addRow(data);
                     }
