@@ -30,19 +30,7 @@ public class SignInController {
             case 0:
                 if (password.equals("system admin"))// Sys admin
                 {
-            try {
-                DBConnector.createTable("STUDENTS", "Student_ID VARCHAR(255), Student_Name VARCHAR(255)");
-                System.out.println("STUDENTS Table created");
-                DBConnector db = DBConnector.getInstance();
-                db.setSeprator(',');
-                db.loadCSVIntoTable("src/resources/Students.csv", "STUDENTS", true);
-                System.out.println("Data inserted into STUDENTS table");
                 return true;
-            } catch (SQLException ex) {
-                Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-            }
                 }
                 break;
             case 1:
