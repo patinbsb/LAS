@@ -15,38 +15,37 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Patrick Goodson
  */
-
-public class UI extends javax.swing.JFrame
-{
+public class UI extends javax.swing.JFrame {
 
     /**
      * Creates new form UI
      */
-    
     // Object declaration
     Cataloguer cataloguer = new Cataloguer();
     ExternalUser externalUser = new ExternalUser();
     Issuer issuer = new Issuer();
     ReportsManager reportsManager = new ReportsManager();
     SystemAdmin systemAdmin = new SystemAdmin();
-    
+    Administration admin = new Administration();
+
     // UI config
     static DefaultListModel typeModel = new DefaultListModel();
     static DefaultListModel issuerModel = new DefaultListModel();
+
     // Index of listModel
     static int currentSelection = 0;
     public static CardLayout card = new CardLayout();
-    
-    public UI() throws ClassNotFoundException, SQLException
-    {
+
+    public UI() throws ClassNotFoundException, SQLException {
         // Connect to the SQL database
         DBConnector.connect();
-        
+
         initComponents();
         card = (CardLayout) jPanelMain.getLayout();
         this.getRootPane().setDefaultButton(jButtonLogin);
@@ -57,43 +56,46 @@ public class UI extends javax.swing.JFrame
         typeModel.addElement("Issuer");
         typeModel.addElement("External User");
         jListUsers.setModel(typeModel);
-        
-        jList3.setModel(issuerModel);
-        
-        // Create a listener for when the user changes a selection in the list
-        jListUsers.addListSelectionListener(new ListSelectionListener()
-                {
 
-                    @Override
-                    public void valueChanged(ListSelectionEvent e)
-                    {
-                        if (!e.getValueIsAdjusting())
-                        {
-                            currentSelection = jListUsers.getSelectedIndex();
-                            checkPasswordRequired(currentSelection);
-                        }
-                    }
-            /**
-             * Sets if a password is required for each user selection
-             * @param eventSelection 
-             */
-            private void checkPasswordRequired(int eventSelection)
-            {
-                switch(eventSelection)
-                {
-                    case 0: jPasswordField.setEnabled(true);// Sys admin
-                        break;
-                    case 1: jPasswordField.setEnabled(true);// Reports manager
-                        break;
-                    case 2: jPasswordField.setEnabled(true);// Cataloguer
-                        break;
-                    case 3: jPasswordField.setEnabled(true);// Issuer
-                        break;
-                    case 4: jPasswordField.setEnabled(false);// External user
+        jList3.setModel(issuerModel);
+
+        // Create a listener for when the user changes a selection in the list
+        jListUsers.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    currentSelection = jListUsers.getSelectedIndex();
+                    checkPasswordRequired(currentSelection);
                 }
             }
 
-                });
+            /**
+             * Sets if a password is required for each user selection
+             *
+             * @param eventSelection
+             */
+            private void checkPasswordRequired(int eventSelection) {
+                switch (eventSelection) {
+                    case 0:
+                        jPasswordField.setEnabled(true);// Sys admin
+                        break;
+                    case 1:
+                        jPasswordField.setEnabled(true);// Reports manager
+                        break;
+                    case 2:
+                        jPasswordField.setEnabled(true);// Cataloguer
+                        break;
+                    case 3:
+                        jPasswordField.setEnabled(true);// Issuer
+                        break;
+                    case 4:
+                        jPasswordField.setEnabled(false);// External user
+                }
+            }
+
+        });
+
     }
 
     /**
@@ -103,8 +105,7 @@ public class UI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
         jPanelLogin = new javax.swing.JPanel();
@@ -126,25 +127,22 @@ public class UI extends javax.swing.JFrame
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        mTableonSA = new javax.swing.JTable();
         jSeparator4 = new javax.swing.JSeparator();
         staffdLabel = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        studentdLabel = new javax.swing.JLabel();
         jPanelReportsManager = new javax.swing.JPanel();
         jLabelReportsManager = new javax.swing.JLabel();
         jButtonExport = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jButtonLogout1 = new javax.swing.JButton();
         jPanelCataloguer = new javax.swing.JPanel();
         jLabelCataloguer = new javax.swing.JLabel();
         jButtonLogout2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<String>();
+        jList2 = new javax.swing.JList<>();
         jTextFieldSearch2 = new javax.swing.JTextField();
         jButtonSearch2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jButtonAdd = new javax.swing.JButton();
         jButtonRemove = new javax.swing.JButton();
         jButtonChange = new javax.swing.JButton();
@@ -153,20 +151,20 @@ public class UI extends javax.swing.JFrame
         jLabelIssuer = new javax.swing.JLabel();
         jButtonLogout3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<Item>();
+        jList3 = new javax.swing.JList<>();
         jButtonSearch3 = new javax.swing.JButton();
         jTextFieldSearch3 = new javax.swing.JTextField();
         jButtonIssue = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<String>();
+        jComboBox4 = new javax.swing.JComboBox<>();
         jTextFieldSearch5 = new javax.swing.JTextField();
         jPanelExternalUser = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<String>();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<String>();
+        jList4 = new javax.swing.JList<>();
         jButtonLogout4 = new javax.swing.JButton();
         jTextFieldSearch4 = new javax.swing.JTextField();
         jButtonSearch4 = new javax.swing.JButton();
@@ -177,8 +175,7 @@ public class UI extends javax.swing.JFrame
 
         jLabelUserHint.setText("Select user type:");
 
-        jListUsers.setModel(new javax.swing.AbstractListModel()
-        {
+        jListUsers.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Systen Admin", "Reports Manager", "Cataloguer", "Issuer", "External User" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -189,10 +186,8 @@ public class UI extends javax.swing.JFrame
         jLabelPasswordHint.setText("Password:");
 
         jButtonLogin.setText("Log In");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLoginActionPerformed(evt);
             }
         });
@@ -250,85 +245,47 @@ public class UI extends javax.swing.JFrame
         jLabelSearchHint.setText("Search for member:");
 
         jButtonLogout.setText("Log Out");
-        jButtonLogout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogoutActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+        mTableonSA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
-            new String []
-            {
-                "Staff ID", "Staff Name", "Staff Privilege"
+            new String [] {
+                "Member ID", "Member Name", "Member Email", "Member Privilege", "Member IsStaff"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0)
-        {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(300);
+        jScrollPane6.setViewportView(mTableonSA);
+        if (mTableonSA.getColumnModel().getColumnCount() > 0) {
+            mTableonSA.getColumnModel().getColumn(0).setResizable(false);
+            mTableonSA.getColumnModel().getColumn(0).setPreferredWidth(200);
+            mTableonSA.getColumnModel().getColumn(1).setResizable(false);
+            mTableonSA.getColumnModel().getColumn(1).setPreferredWidth(300);
+            mTableonSA.getColumnModel().getColumn(2).setResizable(false);
+            mTableonSA.getColumnModel().getColumn(2).setPreferredWidth(400);
+            mTableonSA.getColumnModel().getColumn(3).setResizable(false);
+            mTableonSA.getColumnModel().getColumn(3).setPreferredWidth(200);
+            mTableonSA.getColumnModel().getColumn(4).setResizable(false);
+            mTableonSA.getColumnModel().getColumn(4).setPreferredWidth(200);
         }
 
-        staffdLabel.setText("Staff details:");
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String []
-            {
-                "Student ID", "Student Name"
-            }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane7.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0)
-        {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(300);
-        }
-
-        studentdLabel.setText("Student details:");
+        staffdLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        staffdLabel.setText("Member details:");
 
         javax.swing.GroupLayout jPanelSysAdminLayout = new javax.swing.GroupLayout(jPanelSysAdmin);
         jPanelSysAdmin.setLayout(jPanelSysAdminLayout);
@@ -346,29 +303,26 @@ public class UI extends javax.swing.JFrame
                             .addComponent(jSeparator4)
                             .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                                 .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jSeparator2)
                                         .addComponent(jSeparator3)
-                                        .addComponent(jLabelSysAdmin, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
-                                            .addComponent(jButtonAddMember)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jButtonRemoveMember)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jButtonChangePrivilege))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
-                                            .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(staffdLabel))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(studentdLabel)
-                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabelSysAdmin, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
+                                                    .addComponent(jButtonAddMember)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jButtonRemoveMember)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jButtonChangePrivilege))
+                                                .addComponent(staffdLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE))
+                                            .addGap(9, 9, 9)))
                                     .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                                         .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(2, 2, 2)))
                         .addContainerGap())))
         );
         jPanelSysAdminLayout.setVerticalGroup(
@@ -379,16 +333,9 @@ public class UI extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(staffdLabel)
-                    .addComponent(studentdLabel))
-                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(staffdLabel)
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -415,21 +362,17 @@ public class UI extends javax.swing.JFrame
         jLabelReportsManager.setText("Reports manager");
 
         jButtonExport.setText("Export to excel");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExportActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
 
         jButtonLogout1.setText("Log Out");
-        jButtonLogout1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLogout1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogout1ActionPerformed(evt);
             }
         });
@@ -473,38 +416,31 @@ public class UI extends javax.swing.JFrame
         jLabelCataloguer.setText("Cataloguer");
 
         jButtonLogout2.setText("Log Out");
-        jButtonLogout2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLogout2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogout2ActionPerformed(evt);
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel()
-        {
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane3.setViewportView(jList2);
 
         jButtonSearch2.setText("Search");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
         jButtonAdd.setText("Add...");
-        jButtonAdd.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
             }
         });
@@ -570,10 +506,8 @@ public class UI extends javax.swing.JFrame
         jLabelIssuer.setText("Issuee");
 
         jButtonLogout3.setText("Log Out");
-        jButtonLogout3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLogout3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogout3ActionPerformed(evt);
             }
         });
@@ -582,19 +516,15 @@ public class UI extends javax.swing.JFrame
         jScrollPane4.setViewportView(jList3);
 
         jButtonSearch3.setText("Search");
-        jButtonSearch3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSearch3ActionPerformed(evt);
             }
         });
 
         jButtonIssue.setText("Issue Item(s)");
-        jButtonIssue.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonIssue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIssueActionPerformed(evt);
             }
         });
@@ -603,11 +533,9 @@ public class UI extends javax.swing.JFrame
 
         jLabel4.setText("Search By:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author", "Item Type" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
             }
         });
@@ -671,30 +599,25 @@ public class UI extends javax.swing.JFrame
 
         jLabel2.setText("Search By:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author", "Item Type" }));
 
-        jList4.setModel(new javax.swing.AbstractListModel()
-        {
+        jList4.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane5.setViewportView(jList4);
 
         jButtonLogout4.setText("Log Out");
-        jButtonLogout4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLogout4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogout4ActionPerformed(evt);
             }
         });
 
         jButtonSearch4.setText("Search");
-        jButtonSearch4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonSearch4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSearch4ActionPerformed(evt);
             }
         });
@@ -759,20 +682,46 @@ public class UI extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     // Fires on login button pressed, authenticates user.
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonLoginActionPerformed
     {//GEN-HEADEREND:event_jButtonLoginActionPerformed
         // Check with Signincontroller if password is correct.
         SignInController signIn = new SignInController(currentSelection,
                 new String(jPasswordField.getPassword()));
-        if (signIn.Authenticate())
-        {
+        if (signIn.Authenticate()) {
+
+            //if user is system admin, preload data before change panel
+            if (jListUsers.getSelectedValue().equals("System Admin")) {
+                try {
+                    DBConnector.createTable("STUDENTS", "Student_ID VARCHAR(255), Student_Name VARCHAR(255)");
+                    DBConnector db = DBConnector.getInstance();
+                    db.setSeprator(',');
+                    db.loadCSVIntoTable("src/resources/Students.csv", "STUDENTS", true);
+                    System.out.println("Data inserted into STUDENTS table");
+                    
+                    DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
+                    Object[] data = new Object[5];
+                    for (int i = 0; i < MemberController.memberList.size(); i++) {
+                        data[0] = MemberController.memberList.get(i).getID();
+                        data[1] = MemberController.memberList.get(i).getName();
+                        data[2] = MemberController.memberList.get(i).getEmail();
+                        data[3] = MemberController.memberList.get(i).getPrivilege();
+                        data[4] = MemberController.memberList.get(i).isIsStaff();
+
+                        mTable.addRow(data);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
             // Change Panel to selected user on login
             changeCard(currentSelection);
-        }
-        else
-        {
+        } else {
             // Authentication failed.
             JOptionPane.showMessageDialog(null, "Authentication failed : incorrect password!");
         }
@@ -814,11 +763,9 @@ public class UI extends javax.swing.JFrame
         String type = JOptionPane.showInputDialog("Enter Type: ");
         int amountLeft = Integer.parseInt(JOptionPane.showInputDialog("Enter quantity: "));
         boolean selected = jCheckBoxEmail.isSelected();
-        try
-        {
+        try {
             cataloguer.addItem(title, author, type, amountLeft, selected);
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
@@ -829,8 +776,7 @@ public class UI extends javax.swing.JFrame
 
     private void jButtonIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIssueActionPerformed
         int index = jList3.getSelectedIndex();
-        if (index != -1)
-        {
+        if (index != -1) {
             Item item = issuer.getItemList().get(index);
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
             issuer.Issue(userID, item);
@@ -844,15 +790,14 @@ public class UI extends javax.swing.JFrame
             ArrayList<Item> itemList = issuer.searchItems(entry, searchType);
             issuer.setItemList(itemList);
             issuerModel.clear();
-            for (Item item : itemList)
-            {
-                issuerModel.addElement("Title: " + item.getTitle() + " Author: " +
-                        item.getAuthor()+ " Type: " + item.getType());
+            for (Item item : itemList) {
+                issuerModel.addElement("Title: " + item.getTitle() + " Author: "
+                        + item.getAuthor() + " Type: " + item.getType());
             }
         } catch (SQLException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jButtonSearch3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox4ActionPerformed
@@ -860,55 +805,41 @@ public class UI extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
-  
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                try
-                {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
                     new UI().setVisible(true);
-                } catch (ClassNotFoundException ex)
-                {
+                } catch (ClassNotFoundException ex) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex)
-                {
+                } catch (SQLException ex) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -967,23 +898,19 @@ public class UI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JTextField jTextFieldSearch2;
     private javax.swing.JTextField jTextFieldSearch3;
     private javax.swing.JTextField jTextFieldSearch4;
     private javax.swing.JTextField jTextFieldSearch5;
+    private javax.swing.JTable mTableonSA;
     private javax.swing.JLabel staffdLabel;
-    private javax.swing.JLabel studentdLabel;
     // End of variables declaration//GEN-END:variables
 
-    private void changeCard(int currentSelection)
-    {
+    private void changeCard(int currentSelection) {
         card.show(jPanelMain, Integer.toString(currentSelection));
     }
 }
