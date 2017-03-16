@@ -48,7 +48,7 @@ public class DBConnector {
     private static final String VALUES_REGEX = "\\$\\{values\\}";
 
     static Connection conn = null;
-    private char seperator;
+    private static char separator;
 
     //DO NOT MODIFY THIS OPERATION!!!
     private DBConnector() throws SQLException, ClassNotFoundException {
@@ -107,13 +107,27 @@ public class DBConnector {
         PreparedStatement pt = conn.prepareStatement(data);
         pt.setString(1, member.getName());
         pt.setString(2, member.getEmail());
-        pt.setInt(3, member.getPrivilege());
+        pt.setString(3, member.getPrivilege());
         pt.setBoolean(4, member.isIsStaff());
         pt.executeUpdate();
     }
+    
+        public static ArrayList<Member> getMemberTableIntoList() throws SQLException, ClassNotFoundException {
+        ArrayList<Member> mtable = new ArrayList<>();
+        String data = "SELECT * FROM LAS.MEMBERS";
+        DBConnector.connect();
+        PreparedStatement pt = conn.prepareStatement(data);
+        ResultSet rs = pt.executeQuery();
+        while (rs.next()) {
+            mtable.add(new Member(rs.getInt("MEMBER_ID"), rs.getString("NAME"),
+                    rs.getString("EMAIL"), rs.getString("PRIVILEGE"), rs.getBoolean("ISSTAFF")));
+        }
+
+        return mtable;
+    }
 
     //Online source with loading CSV into SQLTable : http://viralpatel.net/blogs/java-load-csv-file-to-database/
-    public void loadCSVIntoTable(String csvFile, String tableName,
+    public static void loadCSVIntoTable(String csvFile, String tableName,
             boolean truncateBeforeLoad) throws Exception {
 
         CSVReader csvReader = null;
@@ -122,7 +136,7 @@ public class DBConnector {
         }
         try {
 
-            csvReader = new CSVReader(new FileReader(csvFile), this.seperator);
+            csvReader = DBConnector.getInstance().createNewReader(csvFile);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +167,7 @@ public class DBConnector {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-            con = this.conn;
+            con = DBConnector.conn;
             con.setAutoCommit(false);
             ps = con.prepareStatement(query);
 
@@ -164,7 +178,7 @@ public class DBConnector {
 
             final int batchSize = 1000;
             int count = 0;
-            java.util.Date date = null;
+            Date date = null;
             while ((nextLine = csvReader.readNext()) != null) {
 
                 if (null != nextLine) {
@@ -203,13 +217,18 @@ public class DBConnector {
             csvReader.close();
         }
     }
-
-    public char getSeprator() {
-        return seperator;
+    
+    public CSVReader createNewReader(String csvFile) throws FileNotFoundException {
+        CSVReader csvReader = new CSVReader(new FileReader(csvFile), DBConnector.separator);
+        return csvReader;
     }
 
-    public void setSeprator(char seperator) {
-        this.seperator = seperator;
+    public static char getSeparator() {
+        return separator;
+    }
+
+    public static void setSeparator(char separator) {
+        DBConnector.separator = separator;
     }
     //Loading CSV into Table END
 }
