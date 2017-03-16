@@ -16,24 +16,16 @@ public class Member
     private String email;
     private ArrayList<Item> borrowedItems = new ArrayList<>();
     boolean isStaff;
-    int privilege;
+    private String privilege;
     
-    public Member (String name, int ID, ArrayList<Item> borrowedItems,
-            String email, int privilege)
+    public Member (int ID, String name, String email, String privilege, boolean isStaff)
     {
         this.name = name;
         this.ID = ID;
-        this.borrowedItems = borrowedItems;
+        //this.borrowedItems = borrowedItems;
         this.email = email;
         this.privilege = privilege;
-        if (privilege != -1)
-        {
-            this.isStaff = true;
-        }
-        else
-        {
-            this.isStaff = false;
-        }
+        this.isStaff = !(privilege.equals("Student") | privilege.equals("External User"));
     }
 
     public String getName() {
@@ -93,11 +85,11 @@ public class Member
         return isStaff;
     }
 
-    public int getPrivilege() {
+    public String getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(int privilege) {
+    public void setPrivilege(String privilege) {
         this.privilege = privilege;
     }
 }
