@@ -31,10 +31,11 @@ public class MemberController
         return memberController;
     }
     
-    public static void addNewMember(String name, ArrayList<Item> borrowedItems,
-            String email, int privilege)
+    public static void addNewMember(String name, String email, String privilege, boolean isStaff)
     {
-        memberList.add(new Member(name, currentMemberID, borrowedItems, email, privilege));
+        //method for getting last member ID then +1 to be a new ID
+        
+        memberList.add(new Member(currentMemberID, name, email, privilege, isStaff));
         currentMemberID++;
     }
     
