@@ -699,7 +699,7 @@ public class UI extends javax.swing.JFrame {
                             + "PRIVILEGE VARCHAR(255), "
                             + "ISSTAFF INT NOT NULL, "
                             + "PRIMARY KEY (MEMBER_ID)");
-                    DBConnector.setSeprator(',');
+                    DBConnector.setSeparator(',');
                     DBConnector.loadCSVIntoTable("src/resources/members.csv", "MEMBERS", true);
                     System.out.println("Data inserted into MEMBERS table");
 
