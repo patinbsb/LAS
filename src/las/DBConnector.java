@@ -71,8 +71,9 @@ public class DBConnector {
             String data = "CREATE TABLE " + tableName + "(" + details + ")";
             PreparedStatement pt = conn.prepareStatement(data);
             pt.executeUpdate();
+            System.out.println(tableName + " has been created");
         } else{
-            System.out.println(tableName + " already existed in LAS Database");
+            System.out.println(tableName + " has already existed in LAS Database");
         }
     }
 
