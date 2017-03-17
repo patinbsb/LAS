@@ -66,7 +66,7 @@ public class MemberController {
         memberList.remove(member);
     }
 
-    public static void changeMember(Member memberTochange, Member newMember) {
+    public static void changeMPri(Member memberTochange, Member newMember) {
         int memberPos = memberList.indexOf(memberTochange);
         memberList.set(memberPos, newMember);
     }
