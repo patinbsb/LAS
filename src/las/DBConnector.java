@@ -14,6 +14,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import au.com.bytecode.opencsv.CSVReader;
+import java.io.IOException;
 
 /**
  *
@@ -49,6 +50,7 @@ public class DBConnector {
 
     static Connection conn = null;
     private static char separator;
+    static boolean truncateBeforeLoad = false;
 
     //DO NOT MODIFY THIS OPERATION!!!
     private DBConnector() throws SQLException, ClassNotFoundException {
@@ -66,13 +68,13 @@ public class DBConnector {
     public static void createTable(String tableName, String details) throws SQLException {
         DatabaseMetaData dbmd = conn.getMetaData();
         ResultSet rs = dbmd.getTables(null, "LAS", tableName, null);
-        
+
         if (!rs.next()) {
             String data = "CREATE TABLE " + tableName + "(" + details + ")";
             PreparedStatement pt = conn.prepareStatement(data);
             pt.executeUpdate();
             System.out.println(tableName + " has been created");
-        } else{
+        } else {
             System.out.println(tableName + " has already existed in LAS Database");
         }
     }
@@ -102,17 +104,18 @@ public class DBConnector {
     }
 
     public static void insertMemberIntoTable(Member member) throws SQLException {
-        String data = "INSERT INTO MEMBERS(NAME,EMAIL,PRIVILEGE,ISSTAFF)"
-                + "Values (?,?,?,?)";
+        String data = "INSERT INTO MEMBERS(MEMBER_ID,NAME,EMAIL,PRIVILEGE,ISSTAFF)"
+                + "Values (?,?,?,?,?)";
         PreparedStatement pt = conn.prepareStatement(data);
-        pt.setString(1, member.getName());
-        pt.setString(2, member.getEmail());
-        pt.setString(3, member.getPrivilege());
-        pt.setBoolean(4, member.isIsStaff());
+        pt.setInt(1, member.getID());
+        pt.setString(2, member.getName());
+        pt.setString(3, member.getEmail());
+        pt.setString(4, member.getPrivilege());
+        pt.setBoolean(5, member.isIsStaff());
         pt.executeUpdate();
     }
-    
-        public static ArrayList<Member> getMemberTableIntoList() throws SQLException, ClassNotFoundException {
+
+    public static ArrayList<Member> getMemberTableIntoList() throws SQLException, ClassNotFoundException {
         ArrayList<Member> mtable = new ArrayList<>();
         String data = "SELECT * FROM LAS.MEMBERS";
         DBConnector.connect();
@@ -200,7 +203,7 @@ public class DBConnector {
             }
             ps.executeBatch(); // insert remaining records
             con.commit();
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
             con.rollback();
             e.printStackTrace();
             throw new Exception(
@@ -217,7 +220,7 @@ public class DBConnector {
             csvReader.close();
         }
     }
-    
+
     public CSVReader createNewReader(String csvFile) throws FileNotFoundException {
         CSVReader csvReader = new CSVReader(new FileReader(csvFile), DBConnector.separator);
         return csvReader;
@@ -231,4 +234,16 @@ public class DBConnector {
         DBConnector.separator = separator;
     }
     //Loading CSV into Table END
+
+    //Check whether data existed in specific table
+    public static boolean checkDataExistedInTable(String tableName) throws SQLException {
+
+        String check = "SELECT * FROM " + tableName;
+        PreparedStatement pt = conn.prepareStatement(check);
+        ResultSet rs = pt.executeQuery();
+        if (!rs.next()) {
+            truncateBeforeLoad = true;
+        }
+        return truncateBeforeLoad;
+    }
 }
