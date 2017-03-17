@@ -249,8 +249,18 @@ public class UI extends javax.swing.JFrame {
         });
 
         jButtonRemoveMember.setText("Remove a member from list");
+        jButtonRemoveMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveMemberActionPerformed(evt);
+            }
+        });
 
         jButtonChangePrivilege.setText("Change a staff privilege");
+        jButtonChangePrivilege.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangePrivilegeActionPerformed(evt);
+            }
+        });
 
         jButtonSearch.setText("Search Member");
 
@@ -300,8 +310,18 @@ public class UI extends javax.swing.JFrame {
         staffdLabel.setText("Member details:");
 
         jButtonRefreshMTable.setText("Refresh member table");
+        jButtonRefreshMTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshMTableActionPerformed(evt);
+            }
+        });
 
         jButtoncClearSelection.setText("Clear Selection");
+        jButtoncClearSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtoncClearSelectionActionPerformed(evt);
+            }
+        });
 
         jButtonClearSDetail.setText("Clear Search Detail");
 
@@ -322,37 +342,37 @@ public class UI extends javax.swing.JFrame {
                             .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                                 .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
-                                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
-                                            .addGap(38, 38, 38))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
-                                            .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabelSysAdmin, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(staffdLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSysAdminLayout.createSequentialGroup()
-                                                    .addComponent(jButtonAddMember)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jButtonRemoveMember)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jButtonChangePrivilege)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jButtonRefreshMTable)))
-                                            .addGap(0, 0, Short.MAX_VALUE)))
                                     .addComponent(jSeparator3)
                                     .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonClearSDetail)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelSysAdmin)
+                                            .addComponent(staffdLabel)
+                                            .addGroup(jPanelSysAdminLayout.createSequentialGroup()
+                                                .addComponent(jButtonAddMember)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButtonRemoveMember)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButtonChangePrivilege)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButtonRefreshMTable)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createSequentialGroup()
+                                        .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanelSysAdminLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(jButtoncClearSelection))
+                                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
+                                        .addGap(38, 38, 38)))
+                                .addGap(2, 2, 2))
+                            .addGroup(jPanelSysAdminLayout.createSequentialGroup()
+                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonClearSDetail)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGap(2, 2, 2)))
                         .addContainerGap())))
-            .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jButtoncClearSelection)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelSysAdminLayout.setVerticalGroup(
             jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,9 +380,12 @@ public class UI extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabelSysAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(staffdLabel)
+                .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelSysAdminLayout.createSequentialGroup()
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(staffdLabel))
+                    .addComponent(jButtoncClearSelection))
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -373,8 +396,6 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jButtonRemoveMember)
                     .addComponent(jButtonChangePrivilege)
                     .addComponent(jButtonRefreshMTable))
-                .addGap(10, 10, 10)
-                .addComponent(jButtoncClearSelection)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -384,7 +405,7 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSearch)
                     .addComponent(jButtonClearSDetail))
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addComponent(jButtonLogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -742,20 +763,8 @@ public class UI extends javax.swing.JFrame {
                         DBConnector.loadCSVIntoTable("src/resources/members.csv", "MEMBERS", true);
                         System.out.println("Data inserted into MEMBERS table");
                     }
+                    jButtonRefreshMTableActionPerformed(evt);
 
-                    ArrayList<Member> mlist = DBConnector.getMemberTableIntoList();
-                    DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
-                    mTable.setRowCount(0);
-                    Object[] data = new Object[5];
-                    for (int i = 0; i < mlist.size(); i++) {
-                        data[0] = mlist.get(i).getID();
-                        data[1] = mlist.get(i).getName();
-                        data[2] = mlist.get(i).getEmail();
-                        data[3] = mlist.get(i).getPrivilege();
-                        data[4] = mlist.get(i).isIsStaff();
-
-                        mTable.addRow(data);
-                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -852,7 +861,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButtonAddMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMemberActionPerformed
-        // TODO add your handling code here:
+
         String[] prioptions = {"System Admin", "Reports Manager", "Cataloguer",
             "Issuer", "External User", "Student"};
         String[] staffoptions = {"Yes", "No"};
@@ -886,6 +895,53 @@ public class UI extends javax.swing.JFrame {
             System.out.println("User cancel/close diagram");
         }
     }//GEN-LAST:event_jButtonAddMemberActionPerformed
+
+    private void jButtonRemoveMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMemberActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
+        Object[] Data = new Object[2];
+        Data[0] = mTable.getValueAt(mTableonSA.getSelectedRow(), 0);
+        Data[1] = mTable.getValueAt(mTableonSA.getSelectedRow(), 1);
+        int sumbit = JOptionPane.showConfirmDialog(null, "Are you sure to remove:\n"
+                + "Member ID: " + Data[0] + "\n"
+                + "Member Name: " + Data[1], "Remove member?", JOptionPane.OK_CANCEL_OPTION);
+        if (sumbit == JOptionPane.OK_OPTION) {
+            System.out.println("Deleted Member: " + Data[0] + "," + Data[1]);
+        } else {
+            System.out.println("User cancel/close diagram");
+        }
+    }//GEN-LAST:event_jButtonRemoveMemberActionPerformed
+
+    private void jButtonChangePrivilegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePrivilegeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonChangePrivilegeActionPerformed
+
+    private void jButtonRefreshMTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshMTableActionPerformed
+
+        ArrayList<Member> mlist = null;
+        try {
+            mlist = DBConnector.getMemberTableIntoList();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
+        mTable.setRowCount(0);
+        Object[] data = new Object[5];
+        for (Member mlist1 : mlist) {
+            data[0] = mlist1.getID();
+            data[1] = mlist1.getName();
+            data[2] = mlist1.getEmail();
+            data[3] = mlist1.getPrivilege();
+            data[4] = mlist1.isIsStaff();
+            mTable.addRow(data);
+        }
+    }//GEN-LAST:event_jButtonRefreshMTableActionPerformed
+
+    private void jButtoncClearSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncClearSelectionActionPerformed
+
+        mTableonSA.clearSelection();
+    }//GEN-LAST:event_jButtoncClearSelectionActionPerformed
 
     /**
      * @param args the command line arguments
