@@ -20,8 +20,14 @@ public class MemberController {
 
     public static MemberController memberController;
     static ArrayList<Member> memberList = new ArrayList<>();
+    static ArrayList<Member> storedData = new ArrayList<>();
     static int newMemberID = 0;
     static int isStaffindex;
+    static boolean bool;
+    static boolean boolcheck;
+    static ResultSet searchRS;
+    static String query = null;
+    static PreparedStatement pt;
 
     private MemberController() {
     }
@@ -38,8 +44,8 @@ public class MemberController {
         try {
             //method for getting last member ID then +1 to be a new ID\
 
-            String data = "SELECT MAX(MEMBER_ID) FROM LAS.MEMBERS";
-            PreparedStatement pt = DBConnector.conn.prepareStatement(data);
+            query = "SELECT MAX(MEMBER_ID) FROM LAS.MEMBERS";
+            pt = DBConnector.conn.prepareStatement(query);
 
             try (ResultSet rs = pt.executeQuery()) {
                 while (rs.next()) {
@@ -63,14 +69,34 @@ public class MemberController {
     }
 
     public static void removeMember(Member member) {
-        memberList.remove(member);
+
+        try {
+            query = "DELETE FROM MEMBERS WHERE MEMBER_ID = ?";
+            pt = DBConnector.conn.prepareStatement(query);
+            pt.setInt(1, member.getID());
+            pt.executeUpdate();
+            memberList.remove(member);
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void changeMPri(Member memberTochange, Member newMember) {
-        int memberPos = memberList.indexOf(memberTochange);
-        memberList.set(memberPos, newMember);
+    public static void changeMPri(int ID, String pri) {
+        try {
+            //        arg = Member memberTochange, Member newMember
+//        int memberPos = memberList.indexOf(memberTochange);
+//        memberList.set(memberPos, newMember);
+            query = "UPDATE MEMBERS SET PRIVILEGE = ? WHERE MEMBER_ID = ?";
+            pt = DBConnector.conn.prepareStatement(query);
+            pt.setString(1, pri);
+            pt.setInt(2, ID);
+            pt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    //Could get rid of this since provided a function call searchMember
     public static Member getMemberByID(int ID) {
         for (Member member : memberList) {
             if (member.getID() == ID) {
@@ -80,6 +106,7 @@ public class MemberController {
         return null;
     }
 
+    //Could get rid of this since provided a function call searchMember
     public static ArrayList<Member> getMemberByName(String name) {
         ArrayList<Member> results = new ArrayList<>();
         for (Member member : memberList) {
@@ -90,4 +117,56 @@ public class MemberController {
         return results;
     }
 
+    public static ArrayList<Member> searchMember(String keyword, String searchType) {
+        try {
+            ArrayList<Member> mlist = DBConnector.getMemberTableIntoList();
+            storedData.clear();
+            for (Member m : mlist) {
+                switch (searchType) {
+                    case "Member ID":
+                        if (m.getID() == Integer.parseInt(keyword)) {
+                            storedData.add(m);
+                        }
+                        break;
+                    case "Name":
+                        if (m.getName().contains(keyword)) {
+                            storedData.add(m);
+                        }
+                        break;
+                    case "Email":
+                        if (m.getEmail().contains(keyword)) {
+                            storedData.add(m);
+                        }
+                        break;
+                    case "Privilege":
+                        if (m.getPrivilege().contains(keyword)) {
+                            storedData.add(m);
+                        }
+                        break;
+                    case "IsStaff":
+                        switch (keyword) {
+                            case "Yes":
+                                bool = true;
+                                boolcheck = true;
+                                break;
+                            case "No":
+                                bool = false;
+                                boolcheck = true;
+                                break;
+                            case "Default":
+                                boolcheck = false;
+                                break;
+
+                        }
+                        if (m.isIsStaff() == bool && boolcheck) {
+                            storedData.add(m);
+                        }
+                        break;
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return storedData;
+    }
 }

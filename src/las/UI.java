@@ -4,7 +4,6 @@
 package las;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,9 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.Timer;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -133,10 +131,13 @@ public class UI extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         mTableonSA = new javax.swing.JTable();
         jSeparator4 = new javax.swing.JSeparator();
-        staffdLabel = new javax.swing.JLabel();
+        jLabelMemberDt = new javax.swing.JLabel();
         jButtonRefreshMTable = new javax.swing.JButton();
         jButtoncClearSelection = new javax.swing.JButton();
         jButtonClearSDetail = new javax.swing.JButton();
+        jComboBoxSearchTypeonSA = new javax.swing.JComboBox();
+        jLabelSearchMemberBy = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanelReportsManager = new javax.swing.JPanel();
         jLabelReportsManager = new javax.swing.JLabel();
         jButtonExport = new javax.swing.JButton();
@@ -263,6 +264,11 @@ public class UI extends javax.swing.JFrame {
         });
 
         jButtonSearch.setText("Search Member");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
 
         jLabelSearchHint.setText("Enter any detail to search a member:");
 
@@ -306,8 +312,8 @@ public class UI extends javax.swing.JFrame {
             mTableonSA.getColumnModel().getColumn(4).setPreferredWidth(200);
         }
 
-        staffdLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        staffdLabel.setText("Member details:");
+        jLabelMemberDt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelMemberDt.setText("Member details:");
 
         jButtonRefreshMTable.setText("Refresh member table");
         jButtonRefreshMTable.addActionListener(new java.awt.event.ActionListener() {
@@ -324,6 +330,15 @@ public class UI extends javax.swing.JFrame {
         });
 
         jButtonClearSDetail.setText("Clear Search Detail");
+        jButtonClearSDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSDetailActionPerformed(evt);
+            }
+        });
+
+        jComboBoxSearchTypeonSA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Member ID", "Name", "Email", "Privilege", "IsStaff" }));
+
+        jLabelSearchMemberBy.setText("Search member by:");
 
         javax.swing.GroupLayout jPanelSysAdminLayout = new javax.swing.GroupLayout(jPanelSysAdmin);
         jPanelSysAdmin.setLayout(jPanelSysAdminLayout);
@@ -346,16 +361,8 @@ public class UI extends javax.swing.JFrame {
                                     .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                                         .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabelSysAdmin)
-                                            .addComponent(staffdLabel)
-                                            .addGroup(jPanelSysAdminLayout.createSequentialGroup()
-                                                .addComponent(jButtonAddMember)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButtonRemoveMember)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButtonChangePrivilege)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButtonRefreshMTable)))
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jLabelMemberDt))
+                                        .addGap(0, 556, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSysAdminLayout.createSequentialGroup()
                                         .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jPanelSysAdminLayout.createSequentialGroup()
@@ -367,12 +374,25 @@ public class UI extends javax.swing.JFrame {
                             .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelSearchMemberBy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxSearchTypeonSA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
+                                .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonClearSDetail)
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGap(2, 2, 2)))
-                        .addContainerGap())))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())
+                    .addGroup(jPanelSysAdminLayout.createSequentialGroup()
+                        .addComponent(jButtonAddMember)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonRemoveMember)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonChangePrivilege)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonRefreshMTable)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelSysAdminLayout.setVerticalGroup(
             jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +404,7 @@ public class UI extends javax.swing.JFrame {
                     .addGroup(jPanelSysAdminLayout.createSequentialGroup()
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(staffdLabel))
+                        .addComponent(jLabelMemberDt))
                     .addComponent(jButtoncClearSelection))
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,14 +418,18 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jButtonRefreshMTable))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelSearchHint, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSearch)
-                    .addComponent(jButtonClearSDetail))
-                .addGap(60, 60, 60)
+                    .addComponent(jButtonClearSDetail)
+                    .addComponent(jComboBoxSearchTypeonSA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSearchMemberBy))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(jButtonLogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -764,6 +788,7 @@ public class UI extends javax.swing.JFrame {
                         System.out.println("Data inserted into MEMBERS table");
                     }
                     jButtonRefreshMTableActionPerformed(evt);
+                    mTableonSA.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
                 } catch (SQLException ex) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
@@ -899,14 +924,20 @@ public class UI extends javax.swing.JFrame {
     private void jButtonRemoveMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMemberActionPerformed
         // TODO add your handling code here:
         DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
-        Object[] Data = new Object[2];
+        Object[] Data = new Object[5];
         Data[0] = mTable.getValueAt(mTableonSA.getSelectedRow(), 0);
         Data[1] = mTable.getValueAt(mTableonSA.getSelectedRow(), 1);
+        Data[2] = mTable.getValueAt(mTableonSA.getSelectedRow(), 2);
+        Data[3] = mTable.getValueAt(mTableonSA.getSelectedRow(), 3);
+        Data[4] = mTable.getValueAt(mTableonSA.getSelectedRow(), 4);
         int sumbit = JOptionPane.showConfirmDialog(null, "Are you sure to remove:\n"
                 + "Member ID: " + Data[0] + "\n"
                 + "Member Name: " + Data[1], "Remove member?", JOptionPane.OK_CANCEL_OPTION);
         if (sumbit == JOptionPane.OK_OPTION) {
-            System.out.println("Deleted Member: " + Data[0] + "," + Data[1]);
+            Member m = new Member(Integer.parseInt(Data[0].toString()), Data[1].toString(), Data[2].toString(),
+                    Data[3].toString(), Boolean.getBoolean(Data[4].toString()));
+            MemberController.removeMember(m);
+            System.out.println("Member removed: " + Data[0] + Data[1]);
         } else {
             System.out.println("User cancel/close diagram");
         }
@@ -914,6 +945,37 @@ public class UI extends javax.swing.JFrame {
 
     private void jButtonChangePrivilegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePrivilegeActionPerformed
         // TODO add your handling code here:
+        int mID = Integer.parseInt(mTableonSA.getValueAt(mTableonSA.getSelectedRow(), 0).toString());
+        String pri = mTableonSA.getValueAt(mTableonSA.getSelectedRow(), 3).toString();
+        boolean isStaff = false;
+        switch (mTableonSA.getValueAt(mTableonSA.getSelectedRow(), 4).toString()) {
+            case "Yes":
+                isStaff = true;
+                break;
+            case "No":
+                isStaff = false;
+                break;
+        }
+        String[] prioptions = {"System Admin", "Reports Manager", "Cataloguer",
+            "Issuer", "External User"};
+        JLabel OriginalPri = new JLabel(pri);
+        JComboBox Pri = new JComboBox(prioptions);
+
+        if (isStaff) {
+            final JComponent[] inputs = new JComponent[]{
+                new JLabel("Member original privilege:"), OriginalPri,
+                new JLabel("Set member new privilege as:"), Pri
+            };
+
+            int sumbit = JOptionPane.showConfirmDialog(null, inputs, "Change a member privilege",
+                    JOptionPane.PLAIN_MESSAGE);
+            if (sumbit == JOptionPane.OK_OPTION) {
+                MemberController.changeMPri(mID, Pri.getSelectedItem().toString());
+                System.out.println("Member Privilege changed from " + OriginalPri.getText() + " to " + Pri.getSelectedItem().toString());
+            } else {
+                System.out.println("User cancel/close diagram/Member is not staff");
+            }
+        }
     }//GEN-LAST:event_jButtonChangePrivilegeActionPerformed
 
     private void jButtonRefreshMTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshMTableActionPerformed
@@ -933,7 +995,11 @@ public class UI extends javax.swing.JFrame {
             data[1] = mlist1.getName();
             data[2] = mlist1.getEmail();
             data[3] = mlist1.getPrivilege();
-            data[4] = mlist1.isIsStaff();
+            if (mlist1.isIsStaff() == true) {
+                data[4] = "Yes";
+            } else {
+                data[4] = "No";
+            }
             mTable.addRow(data);
         }
     }//GEN-LAST:event_jButtonRefreshMTableActionPerformed
@@ -942,6 +1008,37 @@ public class UI extends javax.swing.JFrame {
 
         mTableonSA.clearSelection();
     }//GEN-LAST:event_jButtoncClearSelectionActionPerformed
+
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        String keyword = jTextFieldSearch.getText();
+        ArrayList<Member> mlist = MemberController.searchMember(keyword,
+                jComboBoxSearchTypeonSA.getSelectedItem().toString());
+        DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
+        if (mlist.isEmpty()) {
+            jButtonRefreshMTableActionPerformed(evt);
+            JOptionPane.showMessageDialog(null, "No data found in member database", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        mTable.setRowCount(0);
+        Object[] Data = new Object[5];
+        for (Member m : mlist) {
+            Data[0] = m.getID();
+            Data[1] = m.getName();
+            Data[2] = m.getEmail();
+            Data[3] = m.getPrivilege();
+            if (m.isIsStaff()) {
+                Data[4] = "Yes";
+            } else if (!m.isIsStaff()) {
+                Data[4] = "No";
+            }
+            mTable.addRow(Data);
+        }
+    }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    private void jButtonClearSDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSDetailActionPerformed
+
+        jTextFieldSearch.setText(null);
+    }//GEN-LAST:event_jButtonClearSDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1011,15 +1108,18 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox jComboBoxSearchTypeonSA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCataloguer;
     private javax.swing.JLabel jLabelIssuer;
+    private javax.swing.JLabel jLabelMemberDt;
     private javax.swing.JLabel jLabelPasswordHint;
     private javax.swing.JLabel jLabelReportsManager;
     private javax.swing.JLabel jLabelSearchHint;
+    private javax.swing.JLabel jLabelSearchMemberBy;
     private javax.swing.JLabel jLabelSysAdmin;
     private javax.swing.JLabel jLabelUserHint;
     private javax.swing.JList<String> jList2;
@@ -1039,6 +1139,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1048,7 +1149,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearch4;
     private javax.swing.JTextField jTextFieldSearch5;
     private javax.swing.JTable mTableonSA;
-    private javax.swing.JLabel staffdLabel;
     // End of variables declaration//GEN-END:variables
 
     private void changeCard(int currentSelection) {
