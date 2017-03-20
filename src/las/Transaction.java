@@ -7,11 +7,11 @@ package las;
  *
  * @author Patrick Goodson
  */
-class Transaction
+public class Transaction
 {
     private int memberID;
     private int itemID;
-    Transaction(int memberID, int itemID)
+    public Transaction(int memberID, int itemID)
     {
         this.memberID = memberID;
         this.itemID = itemID;
