@@ -69,10 +69,10 @@ public class DBConnector {
         }
     }
 
-    /*
+    /**
      Create Table with(example):
-     tableName: ITEMS << All in capital letters
-     details: ITEM_ID,NAME,NUMBER_AVAILABLE << All in capital letters and put a dash instead of space
+     tableName: ITEMS  <All in capital letters>
+     details: ITEM_ID,NAME,NUMBER_AVAILABLE <All in capital letters and put a dash instead of space>
      */
     public static void createTable(String tableName, String details) throws SQLException {
         DatabaseMetaData dbmd = conn.getMetaData();
@@ -89,10 +89,10 @@ public class DBConnector {
     }
 
     //Online source with loading CSV into SQLTable : http://viralpatel.net/blogs/java-load-csv-file-to-database/
-    /*
+    /**
      Load CSV test data into SQL Table
-     csvFile : src/resources/xxx.csv << put your csv file under this path
-     tableName: TABLENAME << All in capital letters
+     csvFile : src/resources/xxx.csv  (put your csv file under this path)
+     tableName: TABLENAME  (All in capital letters)
      truncateBeforeLoad: 
      true = if data not existed in SQL Table, write test data inside
      false = if data exisited in SQL Table, don't write again.
