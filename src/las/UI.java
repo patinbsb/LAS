@@ -883,7 +883,13 @@ public class UI extends javax.swing.JFrame {
         if (index != -1) {
             Item item = issuer.getItemList().get(index);
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
-            issuer.Issue(userID, item);
+            try
+            {
+                issuer.Issue(userID, item);
+            } catch (SQLException ex)
+            {
+                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonIssueActionPerformed
 

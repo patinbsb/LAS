@@ -115,7 +115,7 @@ public class DBConnector {
             throw new Exception("Not a valid connection.");
         }
         try {
-
+            
             csvReader = DBConnector.getInstance().createNewReader(csvFile);
 
         } catch (Exception e) {
@@ -176,7 +176,7 @@ public class DBConnector {
             }
             ps.executeBatch(); // insert remaining records
             conn.commit();
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             conn.rollback();
             e.printStackTrace();
             throw new Exception(
@@ -217,6 +217,51 @@ public class DBConnector {
         return exists;
     }
 
+    /*  Transaction Part Functions */
+    public static void insertTransactionIntoTable(Member member, Item item) throws SQLException
+    {
+        String data = "INSERT INTO TRANSACTIONS(MEMBER_ID,ITEM_ID)"
+                + "Values (?,?)";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setInt(1, member.getID());
+        pt.setInt(2, item.getItemID());
+        pt.executeUpdate();
+    }
+    
+    public static ArrayList<Transaction> getTransactionTable() throws SQLException
+    {
+        ArrayList<Transaction> table = new ArrayList<>();
+        String data = "SELECT * FROM Transactions";
+        PreparedStatement pt = conn.prepareStatement(data);
+        ResultSet rs = pt.executeQuery();
+        while (rs.next())
+        {
+            table.add(new Transaction(rs.getInt("MEMBER_ID"), rs.getInt("ITEM_ID")));
+        }
+
+        return table;
+    }
+    
+    public static void insertTransactionIntoTable(Transaction transaction) throws SQLException
+    {
+        String data = "INSERT INTO TRANSACTIONS(MEMBER_ID, ITEM_ID)"
+                + "Values (?,?)";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setInt(1, transaction.getMemberID());
+        pt.setInt(2, transaction.getItemID());
+        pt.executeUpdate();
+    }
+    
+    public static void removeTransactionFromTable(Transaction transaction) throws SQLException
+    {
+        String data = "DELETE FROM TRANSACTIONS WHERE MEMBER_ID = ?"
+                + "AND ITEM_ID = ?";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setInt(1, transaction.getMemberID());
+        pt.setInt(2, transaction.getItemID());
+        pt.executeUpdate();
+    }
+    
     /*  Item Part Functions */
     public static void insertItemIntoTable(Item item) throws SQLException {
         String data = "INSERT INTO Items(title, author, type, amountleft)"
@@ -236,11 +281,31 @@ public class DBConnector {
         ResultSet rs = pt.executeQuery();
         while (rs.next()) {
             table.add(new Item(rs.getString("title"), rs.getString("author"),
-                    rs.getString("type"), rs.getInt("ItemID"), rs.getInt("amountleft")));
+                    rs.getString("type"), rs.getInt("Item_ID"), rs.getInt("amountleft")));
         }
 
         return table;
     }
+    
+    public static void incrementAmountLeft(Item item) throws SQLException
+    {
+        String data = "UPDATE ITEMS SET AMOUNTLEFT = ? WHERE ITEM_ID = ?";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setInt(1, (item.getAmountLeft() + 1));
+        pt.setInt(2, item.getItemID());
+        pt.executeUpdate();
+    }
+    
+    public static void decrementAmountLeft(Item item) throws SQLException
+    {
+        String data = "UPDATE ITEMS SET AMOUNTLEFT = ? WHERE ITEM_ID = ?";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setInt(1, (item.getAmountLeft() - 1));
+        pt.setInt(2, item.getItemID());
+        pt.executeUpdate();
+    }
+    
+    
 
     /*  Member Part Functions   */
     public static void insertMemberIntoTable(Member member) throws SQLException {
