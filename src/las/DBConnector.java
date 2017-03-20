@@ -50,7 +50,7 @@ public class DBConnector {
 
     static Connection conn = null;
     private static char separator;
-    static boolean truncateBeforeLoad = false;
+    static boolean truncateBeforeLoad = true;
 
     //DO NOT MODIFY THIS OPERATION!!!
     private DBConnector() throws SQLException, ClassNotFoundException {
@@ -241,8 +241,8 @@ public class DBConnector {
         String check = "SELECT * FROM " + tableName;
         PreparedStatement pt = conn.prepareStatement(check);
         ResultSet rs = pt.executeQuery();
-        if (!rs.next()) {
-            truncateBeforeLoad = true;
+        if (rs.next()) {
+            truncateBeforeLoad = false;
         }
         return truncateBeforeLoad;
     }
