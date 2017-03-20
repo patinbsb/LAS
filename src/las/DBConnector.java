@@ -79,56 +79,6 @@ public class DBConnector {
         }
     }
 
-    public static void insertItemIntoTable(Item item) throws SQLException {
-        String data = "INSERT INTO Items(title, author, type, amountleft)"
-                + "Values (?,?,?,?)";
-        PreparedStatement pt = conn.prepareStatement(data);
-        pt.setString(1, item.getTitle());
-        pt.setString(2, item.getAuthor());
-        pt.setString(3, item.getType());
-        pt.setInt(4, item.getAmountLeft());
-        pt.executeUpdate();
-    }
-
-    public static ArrayList<Item> getItemTable() throws SQLException {
-        ArrayList<Item> table = new ArrayList<>();
-        String data = "SELECT * FROM Items";
-        PreparedStatement pt = conn.prepareStatement(data);
-        ResultSet rs = pt.executeQuery();
-        while (rs.next()) {
-            table.add(new Item(rs.getString("title"), rs.getString("author"),
-                    rs.getString("type"), rs.getInt("ItemID"), rs.getInt("amountleft")));
-        }
-
-        return table;
-    }
-
-    public static void insertMemberIntoTable(Member member) throws SQLException {
-        String data = "INSERT INTO MEMBERS(MEMBER_ID,NAME,EMAIL,PRIVILEGE,ISSTAFF)"
-                + "Values (?,?,?,?,?)";
-        PreparedStatement pt = conn.prepareStatement(data);
-        pt.setInt(1, member.getID());
-        pt.setString(2, member.getName());
-        pt.setString(3, member.getEmail());
-        pt.setString(4, member.getPrivilege());
-        pt.setBoolean(5, member.isIsStaff());
-        pt.executeUpdate();
-    }
-
-    public static ArrayList<Member> getMemberTableIntoList() throws SQLException, ClassNotFoundException {
-        ArrayList<Member> mtable = new ArrayList<>();
-        String data = "SELECT * FROM LAS.MEMBERS";
-        DBConnector.connect();
-        PreparedStatement pt = conn.prepareStatement(data);
-        ResultSet rs = pt.executeQuery();
-        while (rs.next()) {
-            mtable.add(new Member(rs.getInt("MEMBER_ID"), rs.getString("NAME"),
-                    rs.getString("EMAIL"), rs.getString("PRIVILEGE"), rs.getBoolean("ISSTAFF")));
-        }
-
-        return mtable;
-    }
-
     //Online source with loading CSV into SQLTable : http://viralpatel.net/blogs/java-load-csv-file-to-database/
     public static void loadCSVIntoTable(String csvFile, String tableName,
             boolean truncateBeforeLoad) throws Exception {
@@ -234,7 +184,7 @@ public class DBConnector {
         DBConnector.separator = separator;
     }
     //Loading CSV into Table END
-
+    
     //Check whether data existed in specific table
     public static boolean checkDataExistedInTable(String tableName) throws SQLException {
 
@@ -246,4 +196,57 @@ public class DBConnector {
         }
         return truncateBeforeLoad;
     }
+   
+    /*  Item Part Functions */
+    public static void insertItemIntoTable(Item item) throws SQLException {
+        String data = "INSERT INTO Items(title, author, type, amountleft)"
+                + "Values (?,?,?,?)";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setString(1, item.getTitle());
+        pt.setString(2, item.getAuthor());
+        pt.setString(3, item.getType());
+        pt.setInt(4, item.getAmountLeft());
+        pt.executeUpdate();
+    }
+
+    public static ArrayList<Item> getItemTable() throws SQLException {
+        ArrayList<Item> table = new ArrayList<>();
+        String data = "SELECT * FROM Items";
+        PreparedStatement pt = conn.prepareStatement(data);
+        ResultSet rs = pt.executeQuery();
+        while (rs.next()) {
+            table.add(new Item(rs.getString("title"), rs.getString("author"),
+                    rs.getString("type"), rs.getInt("ItemID"), rs.getInt("amountleft")));
+        }
+
+        return table;
+    }
+
+    /*  Member Part Functions   */
+    public static void insertMemberIntoTable(Member member) throws SQLException {
+        String data = "INSERT INTO MEMBERS(MEMBER_ID,NAME,EMAIL,PRIVILEGE,ISSTAFF)"
+                + "Values (?,?,?,?,?)";
+        PreparedStatement pt = conn.prepareStatement(data);
+        pt.setInt(1, member.getID());
+        pt.setString(2, member.getName());
+        pt.setString(3, member.getEmail());
+        pt.setString(4, member.getPrivilege());
+        pt.setBoolean(5, member.isIsStaff());
+        pt.executeUpdate();
+    }
+
+    public static ArrayList<Member> getMemberTableIntoList() throws SQLException, ClassNotFoundException {
+        ArrayList<Member> mtable = new ArrayList<>();
+        String data = "SELECT * FROM LAS.MEMBERS";
+        DBConnector.connect();
+        PreparedStatement pt = conn.prepareStatement(data);
+        ResultSet rs = pt.executeQuery();
+        while (rs.next()) {
+            mtable.add(new Member(rs.getInt("MEMBER_ID"), rs.getString("NAME"),
+                    rs.getString("EMAIL"), rs.getString("PRIVILEGE"), rs.getBoolean("ISSTAFF")));
+        }
+
+        return mtable;
+    }
+
 }
