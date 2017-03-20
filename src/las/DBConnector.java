@@ -53,7 +53,6 @@ public class DBConnector {
 
     static Connection conn = null;
     private static char separator;
-    static boolean truncateBeforeLoad = true;
 
     //DO NOT MODIFY THIS OPERATION!!!
     private DBConnector() throws SQLException, ClassNotFoundException {
@@ -84,7 +83,7 @@ public class DBConnector {
             pt.executeUpdate();
             System.out.println(tableName + " has been created");
         } else {
-            System.out.println(tableName + " has already existed in LAS Database");
+            System.out.println(tableName + " already exists in LAS Database");
         }
     }
 
@@ -109,7 +108,7 @@ public class DBConnector {
     Getter and Setter provided for Separator to set your own separator inside your CSV File
      */
     public static void loadCSVIntoTable(String csvFile, String tableName,
-            boolean truncateBeforeLoad) throws Exception {
+            boolean clearFirst) throws Exception {
 
         CSVReader csvReader = null;
         if (null == DBConnector.conn) {
@@ -150,7 +149,7 @@ public class DBConnector {
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(query);
 
-            if (truncateBeforeLoad) {
+            if (clearFirst) {
                 //delete data from table before loading csv
                 conn.createStatement().execute("DELETE FROM " + tableName);
             }
@@ -210,14 +209,14 @@ public class DBConnector {
 
     //Check whether data existed or not in specific TABLENAME
     public static boolean checkDataExistedInTable(String tableName) throws SQLException {
-
+        boolean exists = true;
         String check = "SELECT * FROM " + tableName;
         PreparedStatement pt = conn.prepareStatement(check);
         ResultSet rs = pt.executeQuery();
         if (rs.next()) {
-            truncateBeforeLoad = false;
+            exists = false;
         }
-        return truncateBeforeLoad;
+        return exists;
     }
 
     /*  Item Part Functions */
@@ -261,7 +260,6 @@ public class DBConnector {
     public static ArrayList<Member> getMemberTableIntoList() throws SQLException, ClassNotFoundException {
         ArrayList<Member> mtable = new ArrayList<>();
         String data = "SELECT * FROM LAS.MEMBERS";
-        DBConnector.connect();
         PreparedStatement pt = conn.prepareStatement(data);
         ResultSet rs = pt.executeQuery();
         while (rs.next()) {
@@ -299,10 +297,20 @@ public class DBConnector {
             + "FOREIGN KEY (ITEM_ID) REFERENCES ITEMS(ITEM_ID)");
             
 
-            boolean check = DBConnector.checkDataExistedInTable("MEMBERS");
-            if (check) {
+            boolean checkMembers = DBConnector.checkDataExistedInTable("MEMBERS");
+            boolean checkItems = DBConnector.checkDataExistedInTable("ITEMS");
+            boolean checkTransactions = DBConnector.checkDataExistedInTable("Transactions");
+            if (checkMembers) {
                 DBConnector.loadCSVIntoTable("src/resources/members.csv", "MEMBERS", true);
                 System.out.println("Data inserted into MEMBERS table");
+            }
+            if (checkItems) {
+                DBConnector.loadCSVIntoTable("src/resources/items.csv", "ITEMS", true);
+                System.out.println("Data inserted into ITEMS table");
+            }
+            if (checkTransactions) {
+                DBConnector.loadCSVIntoTable("src/resources/transactions.csv", "TRANSACTIONS", true);
+                System.out.println("Data inserted into TRANSACTIONS table");
             }
 
         } catch (SQLException ex) {
