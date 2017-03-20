@@ -33,8 +33,6 @@ public class UI extends javax.swing.JFrame {
     ExternalUser externalUser = new ExternalUser();
     Issuer issuer = new Issuer();
     ReportsManager reportsManager = new ReportsManager();
-    SystemAdmin systemAdmin = new SystemAdmin();
-    Administration admin = new Administration();
 
     // UI config
     static DefaultListModel typeModel = new DefaultListModel();
