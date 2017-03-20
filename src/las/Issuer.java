@@ -3,6 +3,7 @@
  */
 package las;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class Issuer extends Search
 {
     ArrayList<Item> itemList = null;
-    public void Issue(int ID, Item item)
+    public void Issue(int ID, Item item) throws SQLException
     {
         Member user = searchMemberByID(ID);
         user.issueItem(item);

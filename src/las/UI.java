@@ -45,6 +45,8 @@ public class UI extends javax.swing.JFrame {
     public UI() throws ClassNotFoundException, SQLException {
         // Connect to the SQL database
         DBConnector.connect();
+        //LOAD TEST DATA AND INITIALISE DATABASE
+        DBConnector.CreateAndLoadMDataIntoTable();
 
         initComponents();
         card = (CardLayout) jPanelMain.getLayout();
@@ -56,7 +58,6 @@ public class UI extends javax.swing.JFrame {
         typeModel.addElement("Issuer");
         typeModel.addElement("External User");
         jListUsers.setModel(typeModel);
-
         jList3.setModel(issuerModel);
 
         // Create a listener for when the user changes a selection in the list
@@ -105,7 +106,8 @@ public class UI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanelMain = new javax.swing.JPanel();
         jPanelLogin = new javax.swing.JPanel();
@@ -181,7 +183,8 @@ public class UI extends javax.swing.JFrame {
 
         jLabelUserHint.setText("Select user type:");
 
-        jListUsers.setModel(new javax.swing.AbstractListModel() {
+        jListUsers.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Systen Admin", "Reports Manager", "Cataloguer", "Issuer", "External User" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -192,8 +195,10 @@ public class UI extends javax.swing.JFrame {
         jLabelPasswordHint.setText("Password:");
 
         jButtonLogin.setText("Log In");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLoginActionPerformed(evt);
             }
         });
@@ -241,29 +246,37 @@ public class UI extends javax.swing.JFrame {
         jLabelSysAdmin.setText("System Administrator Page");
 
         jButtonAddMember.setText("Add a new member");
-        jButtonAddMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonAddMemberActionPerformed(evt);
             }
         });
 
         jButtonRemoveMember.setText("Remove a member from list");
-        jButtonRemoveMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRemoveMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonRemoveMemberActionPerformed(evt);
             }
         });
 
         jButtonChangePrivilege.setText("Change a staff privilege");
-        jButtonChangePrivilege.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonChangePrivilege.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonChangePrivilegeActionPerformed(evt);
             }
         });
 
         jButtonSearch.setText("Search Member");
-        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSearchActionPerformed(evt);
             }
         });
@@ -271,33 +284,42 @@ public class UI extends javax.swing.JFrame {
         jLabelSearchHint.setText("Enter any detail to search a member:");
 
         jButtonLogout.setText("Log Out");
-        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogoutActionPerformed(evt);
             }
         });
 
         mTableonSA.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Member ID", "Member Name", "Member Email", "Member Privilege", "Member IsStaff"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
+        mTableonSA.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane6.setViewportView(mTableonSA);
-        if (mTableonSA.getColumnModel().getColumnCount() > 0) {
+        if (mTableonSA.getColumnModel().getColumnCount() > 0)
+        {
             mTableonSA.getColumnModel().getColumn(0).setResizable(false);
             mTableonSA.getColumnModel().getColumn(0).setPreferredWidth(200);
             mTableonSA.getColumnModel().getColumn(1).setResizable(false);
@@ -314,22 +336,28 @@ public class UI extends javax.swing.JFrame {
         jLabelMemberDt.setText("Member details:");
 
         jButtonRefreshMTable.setText("Refresh member table");
-        jButtonRefreshMTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRefreshMTable.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonRefreshMTableActionPerformed(evt);
             }
         });
 
         jButtoncClearSelection.setText("Clear Selection");
-        jButtoncClearSelection.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtoncClearSelection.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtoncClearSelectionActionPerformed(evt);
             }
         });
 
         jButtonClearSDetail.setText("Clear Search Detail");
-        jButtonClearSDetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonClearSDetail.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonClearSDetailActionPerformed(evt);
             }
         });
@@ -438,8 +466,10 @@ public class UI extends javax.swing.JFrame {
         jLabelReportsManager.setText("Reports manager");
 
         jButtonExport.setText("Export to excel");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonExportActionPerformed(evt);
             }
         });
@@ -447,8 +477,10 @@ public class UI extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
 
         jButtonLogout1.setText("Log Out");
-        jButtonLogout1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout1ActionPerformed(evt);
             }
         });
@@ -492,13 +524,16 @@ public class UI extends javax.swing.JFrame {
         jLabelCataloguer.setText("Cataloguer");
 
         jButtonLogout2.setText("Log Out");
-        jButtonLogout2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout2ActionPerformed(evt);
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        jList2.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -508,15 +543,19 @@ public class UI extends javax.swing.JFrame {
         jButtonSearch2.setText("Search");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maintain Items", "Maintain Sources", " ", " " }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
         jButtonAdd.setText("Add...");
-        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonAddActionPerformed(evt);
             }
         });
@@ -582,8 +621,10 @@ public class UI extends javax.swing.JFrame {
         jLabelIssuer.setText("Issuee");
 
         jButtonLogout3.setText("Log Out");
-        jButtonLogout3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout3ActionPerformed(evt);
             }
         });
@@ -592,15 +633,19 @@ public class UI extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jList3);
 
         jButtonSearch3.setText("Search");
-        jButtonSearch3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSearch3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSearch3ActionPerformed(evt);
             }
         });
 
         jButtonIssue.setText("Issue Item(s)");
-        jButtonIssue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonIssue.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonIssueActionPerformed(evt);
             }
         });
@@ -610,8 +655,10 @@ public class UI extends javax.swing.JFrame {
         jLabel4.setText("Search By:");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox4ActionPerformed(evt);
             }
         });
@@ -677,7 +724,8 @@ public class UI extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
 
-        jList4.setModel(new javax.swing.AbstractListModel() {
+        jList4.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -685,15 +733,19 @@ public class UI extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jList4);
 
         jButtonLogout4.setText("Log Out");
-        jButtonLogout4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogout4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLogout4ActionPerformed(evt);
             }
         });
 
         jButtonSearch4.setText("Search");
-        jButtonSearch4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSearch4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSearch4ActionPerformed(evt);
             }
         });
@@ -765,17 +817,15 @@ public class UI extends javax.swing.JFrame {
 
         SignInController signIn = new SignInController(currentSelection,
                 new String(jPasswordField.getPassword()));
-        if (signIn.Authenticate()) {
-
-            //if user is system admin, create and load test data into sql table before change panel
-            if (jListUsers.getSelectedValue().equals("System Admin")) {
-                    DBConnector.CreateAndLoadMDataIntoTable();
-                    jButtonRefreshMTableActionPerformed(evt);
-                    mTableonSA.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            }
+        
+        if (signIn.Authenticate())
+        {
             // Change Panel to selected user on login
             changeCard(currentSelection);
-        } else {
+        }
+        
+        else
+        {
             // Authentication failed.
             JOptionPane.showMessageDialog(null, "Authentication failed : incorrect password!");
         }
@@ -833,7 +883,13 @@ public class UI extends javax.swing.JFrame {
         if (index != -1) {
             Item item = issuer.getItemList().get(index);
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
-            issuer.Issue(userID, item);
+            try
+            {
+                issuer.Issue(userID, item);
+            } catch (SQLException ex)
+            {
+                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonIssueActionPerformed
 

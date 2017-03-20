@@ -39,10 +39,17 @@ public abstract class Search
         return memberResults;
     }
     
-    public Member searchMemberByID(int ID)
+    public Member searchMemberByID(int ID) throws SQLException, ClassNotFoundException
     {
-        Member member = MemberController.getMemberByID(ID);
-        return member;
+        ArrayList<Member> memberList = DBConnector.getMemberTableIntoList();
+        for (Member member : memberList)
+        {
+            if (member.getID() == ID)
+            {
+                return member;
+            }
+        }
+        return null;
     }
     
     public Source getSourceByID(int ID)

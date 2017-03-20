@@ -3,6 +3,7 @@
  */
 package las;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -60,25 +61,19 @@ public class Member
         this.borrowedItems = borrowedItems;
     }
     
-    public void returnItem(Item item)
+    public void returnItem(Item item) throws SQLException
     {
-        for (Item currentItem: borrowedItems)
-        {
-            if (currentItem.equals(item))
-            {
-                ItemController.returnItem(currentItem);
-                borrowedItems.remove(currentItem);
-            }
-        }
+        DBConnector.removeTransactionFromTable(new Transaction(ID, item.getItemID()));
+        DBConnector.incrementAmountLeft(item);
     }
     
-    public void issueItem(Item item)
+    public void issueItem(Item item) throws SQLException
     {
-        if (!borrowedItems.contains(item))
+        if (item.getAmountLeft() > 0)
         {
-            borrowedItems.add(item);
+            DBConnector.insertTransactionIntoTable(new Transaction(ID, item.getItemID()));
+            DBConnector.decrementAmountLeft(item);
         }
-
     }
 
     public boolean isIsStaff() {
