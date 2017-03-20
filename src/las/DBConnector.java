@@ -69,9 +69,9 @@ public class DBConnector {
     }
 
     /**
-     Create Table with(example):
-     tableName: ITEMS  <All in capital letters>
-     details: ITEM_ID,NAME,NUMBER_AVAILABLE <All in capital letters and put a dash instead of space>
+     * Create Table with(example): tableName: ITEMS  <All in capital letters>
+     * details: ITEM_ID,NAME,NUMBER_AVAILABLE
+     * <All in capital letters and put a dash instead of space>
      */
     public static void createTable(String tableName, String details) throws SQLException {
         DatabaseMetaData dbmd = conn.getMetaData();
@@ -89,23 +89,28 @@ public class DBConnector {
 
     //Online source with loading CSV into SQLTable : http://viralpatel.net/blogs/java-load-csv-file-to-database/
     /**
-     Load CSV test data into SQL Table
-     csvFile : src/resources/xxx.csv  (put your csv file under this path)
-     tableName: TABLENAME  (All in capital letters)
-     truncateBeforeLoad: 
-     true = if data not existed in SQL Table, write test data inside
-     false = if data exisited in SQL Table, don't write again.
-    
-     example for truncateBeforeLoad:
-     boolean check = DBConnector.checkDataExistedInTable("MEMBERS");
-     if (check) {
-     DBConnector.loadCSVIntoTable("src/resources/members.csv", "MEMBERS", true);
-     System.out.println("Test data inserted into MEMBERS table");
-     }
-    
-     ignore createNewReader, since it uses for loadCSVIntoTable, don't modify it
-    
-    Getter and Setter provided for Separator to set your own separator inside your CSV File
+     * Load CSV test data into SQL Table
+     *
+     * example for clearFirst: 
+     * boolean check = DBConnector.checkDataExistedInTable("MEMBERS"); 
+     * 
+     * if (check) {
+     * DBConnector.loadCSVIntoTable("src/resources/members.csv", "MEMBERS",
+     * true); System.out.println("Test data inserted into MEMBERS table"); 
+     * }
+     *
+     * ignore createNewReader, since it uses for loadCSVIntoTable, don't modify
+     * it
+     *
+     * Getter and Setter provided for Separator to set your own separator inside
+     * your CSV File
+     *
+     * @param csvFile : src/resources/xxx.csv (put your csv file under this
+     * path)
+     * @param tableName: TABLENAME (All in capital letters)
+     * @param clearFirst true = if data not existed in SQL Table, write test
+     * data inside false = if data exisited in SQL Table, don't write again.
+     * @throws java.lang.Exception
      */
     public static void loadCSVIntoTable(String csvFile, String tableName,
             boolean clearFirst) throws Exception {
@@ -115,10 +120,10 @@ public class DBConnector {
             throw new Exception("Not a valid connection.");
         }
         try {
-            
+
             csvReader = DBConnector.getInstance().createNewReader(csvFile);
 
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException | FileNotFoundException e) {
             e.printStackTrace();
             throw new Exception("Error occured while executing file. "
                     + e.getMessage());
@@ -218,8 +223,7 @@ public class DBConnector {
     }
 
     /*  Transaction Part Functions */
-    public static void insertTransactionIntoTable(Member member, Item item) throws SQLException
-    {
+    public static void insertTransactionIntoTable(Member member, Item item) throws SQLException {
         String data = "INSERT INTO TRANSACTIONS(MEMBER_ID,ITEM_ID)"
                 + "Values (?,?)";
         PreparedStatement pt = conn.prepareStatement(data);
@@ -227,23 +231,20 @@ public class DBConnector {
         pt.setInt(2, item.getItemID());
         pt.executeUpdate();
     }
-    
-    public static ArrayList<Transaction> getTransactionTable() throws SQLException
-    {
+
+    public static ArrayList<Transaction> getTransactionTable() throws SQLException {
         ArrayList<Transaction> table = new ArrayList<>();
         String data = "SELECT * FROM Transactions";
         PreparedStatement pt = conn.prepareStatement(data);
         ResultSet rs = pt.executeQuery();
-        while (rs.next())
-        {
+        while (rs.next()) {
             table.add(new Transaction(rs.getInt("MEMBER_ID"), rs.getInt("ITEM_ID")));
         }
 
         return table;
     }
-    
-    public static void insertTransactionIntoTable(Transaction transaction) throws SQLException
-    {
+
+    public static void insertTransactionIntoTable(Transaction transaction) throws SQLException {
         String data = "INSERT INTO TRANSACTIONS(MEMBER_ID, ITEM_ID)"
                 + "Values (?,?)";
         PreparedStatement pt = conn.prepareStatement(data);
@@ -251,9 +252,8 @@ public class DBConnector {
         pt.setInt(2, transaction.getItemID());
         pt.executeUpdate();
     }
-    
-    public static void removeTransactionFromTable(Transaction transaction) throws SQLException
-    {
+
+    public static void removeTransactionFromTable(Transaction transaction) throws SQLException {
         String data = "DELETE FROM TRANSACTIONS WHERE MEMBER_ID = ?"
                 + "AND ITEM_ID = ?";
         PreparedStatement pt = conn.prepareStatement(data);
@@ -261,7 +261,7 @@ public class DBConnector {
         pt.setInt(2, transaction.getItemID());
         pt.executeUpdate();
     }
-    
+
     /*  Item Part Functions */
     public static void insertItemIntoTable(Item item) throws SQLException {
         String data = "INSERT INTO Items(title, author, type, amountleft)"
@@ -286,26 +286,22 @@ public class DBConnector {
 
         return table;
     }
-    
-    public static void incrementAmountLeft(Item item) throws SQLException
-    {
+
+    public static void incrementAmountLeft(Item item) throws SQLException {
         String data = "UPDATE ITEMS SET AMOUNTLEFT = ? WHERE ITEM_ID = ?";
         PreparedStatement pt = conn.prepareStatement(data);
         pt.setInt(1, (item.getAmountLeft() + 1));
         pt.setInt(2, item.getItemID());
         pt.executeUpdate();
     }
-    
-    public static void decrementAmountLeft(Item item) throws SQLException
-    {
+
+    public static void decrementAmountLeft(Item item) throws SQLException {
         String data = "UPDATE ITEMS SET AMOUNTLEFT = ? WHERE ITEM_ID = ?";
         PreparedStatement pt = conn.prepareStatement(data);
         pt.setInt(1, (item.getAmountLeft() - 1));
         pt.setInt(2, item.getItemID());
         pt.executeUpdate();
     }
-    
-    
 
     /*  Member Part Functions   */
     public static void insertMemberIntoTable(Member member) throws SQLException {
@@ -336,7 +332,7 @@ public class DBConnector {
     public static void CreateAndLoadMDataIntoTable() {
         try {
             DBConnector.setSeparator(',');
-            
+
             DBConnector.createTable("MEMBERS",
                     "MEMBER_ID INT NOT NULL GENERATED BY DEFAULT AS IDENTITY(START WITH 1,INCREMENT"
                     + " BY 1), "
@@ -345,19 +341,18 @@ public class DBConnector {
                     + "PRIVILEGE VARCHAR(255) NOT NULL, "
                     + "ISSTAFF BOOLEAN NOT NULL, "
                     + "PRIMARY KEY (MEMBER_ID)");
-            
+
             DBConnector.createTable("ITEMS",
                     "ITEM_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-            + "TITLE VARCHAR(255) NOT NULL,AUTHOR VARCHAR(255),TYPE VARCHAR(255),"
-            + "AMOUNTLEFT INT NOT NULL,PRIMARY KEY (ITEM_ID)");
-            
+                    + "TITLE VARCHAR(255) NOT NULL,AUTHOR VARCHAR(255),TYPE VARCHAR(255),"
+                    + "AMOUNTLEFT INT NOT NULL,PRIMARY KEY (ITEM_ID)");
+
             DBConnector.createTable("TRANSACTIONS",
-            "MEMBER_ID INTEGER NOT NULL,ITEM_ID INTEGER NOT NULL,"
-            + "TRANSACTION_TIME TIMESTAMP NOT NULL DEFAULT CURRENT TIMESTAMP,"
-            + "PRIMARY KEY (MEMBER_ID, ITEM_ID),"
-            + "FOREIGN KEY (MEMBER_ID) REFERENCES MEMBERS(MEMBER_ID),"
-            + "FOREIGN KEY (ITEM_ID) REFERENCES ITEMS(ITEM_ID)");
-            
+                    "MEMBER_ID INTEGER NOT NULL,ITEM_ID INTEGER NOT NULL,"
+                    + "TRANSACTION_TIME TIMESTAMP NOT NULL DEFAULT CURRENT TIMESTAMP,"
+                    + "PRIMARY KEY (MEMBER_ID, ITEM_ID),"
+                    + "FOREIGN KEY (MEMBER_ID) REFERENCES MEMBERS(MEMBER_ID),"
+                    + "FOREIGN KEY (ITEM_ID) REFERENCES ITEMS(ITEM_ID)");
 
             boolean checkMembers = DBConnector.checkDataExistedInTable("MEMBERS");
             boolean checkItems = DBConnector.checkDataExistedInTable("ITEMS");
