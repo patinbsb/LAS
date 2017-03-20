@@ -885,7 +885,11 @@ public class UI extends javax.swing.JFrame {
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
             try
             {
-                issuer.Issue(userID, item);
+                try {
+                    issuer.Issue(userID, item);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } catch (SQLException ex)
             {
                 Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
