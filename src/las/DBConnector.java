@@ -141,8 +141,6 @@ public class DBConnector {
                 .replaceFirst(KEYS_REGEX, StringUtils.join(headerRow, ","));
         query = query.replaceFirst(VALUES_REGEX, questionmarks);
 
-        System.out.println("Query: " + query);
-
         String[] nextLine;
         PreparedStatement ps = null;
         try {
@@ -289,10 +287,9 @@ public class DBConnector {
             + "AMOUNTLEFT INT NOT NULL,PRIMARY KEY (ITEM_ID)");
             
             DBConnector.createTable("TRANSACTIONS",
-                    "TRANSACTION_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-            + "MEMBER_ID INTEGER NOT NULL,ITEM_ID INTEGER NOT NULL,"
+            "MEMBER_ID INTEGER NOT NULL,ITEM_ID INTEGER NOT NULL,"
             + "TRANSACTION_TIME TIMESTAMP NOT NULL DEFAULT CURRENT TIMESTAMP,"
-            + "PRIMARY KEY (MEMBER_ID),"
+            + "PRIMARY KEY (MEMBER_ID, ITEM_ID),"
             + "FOREIGN KEY (MEMBER_ID) REFERENCES MEMBERS(MEMBER_ID),"
             + "FOREIGN KEY (ITEM_ID) REFERENCES ITEMS(ITEM_ID)");
             
