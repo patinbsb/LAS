@@ -145,16 +145,14 @@ public class DBConnector {
         System.out.println("Query: " + query);
 
         String[] nextLine;
-        Connection con = null;
         PreparedStatement ps = null;
         try {
-            con = DBConnector.conn;
-            con.setAutoCommit(false);
-            ps = con.prepareStatement(query);
+            conn.setAutoCommit(false);
+            ps = conn.prepareStatement(query);
 
             if (truncateBeforeLoad) {
                 //delete data from table before loading csv
-                con.createStatement().execute("DELETE FROM " + tableName);
+                conn.createStatement().execute("DELETE FROM " + tableName);
             }
 
             final int batchSize = 1000;
@@ -180,9 +178,9 @@ public class DBConnector {
                 }
             }
             ps.executeBatch(); // insert remaining records
-            con.commit();
+            conn.commit();
         } catch (SQLException | IOException e) {
-            con.rollback();
+            conn.rollback();
             e.printStackTrace();
             throw new Exception(
                     "Error occured while loading data from file to database."
@@ -190,9 +188,6 @@ public class DBConnector {
         } finally {
             if (null != ps) {
                 ps.close();
-            }
-            if (null != con) {
-                con.close();
             }
 
             csvReader.close();
