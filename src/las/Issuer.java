@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Issuer extends Search
 {
     ArrayList<Item> itemList = null;
-    public void Issue(int ID, Item item) throws SQLException
+    public void Issue(int ID, Item item) throws SQLException, ClassNotFoundException
     {
         Member user = searchMemberByID(ID);
         user.issueItem(item);
