@@ -817,15 +817,15 @@ public class UI extends javax.swing.JFrame {
 
         SignInController signIn = new SignInController(currentSelection,
                 new String(jPasswordField.getPassword()));
-        
-        if (signIn.Authenticate())
-        {
+
+        if (signIn.Authenticate()) {
+            if (jListUsers.getSelectedValue().equals("System Admin")) {
+                //Do show up the table by refreshing it before changing panel
+                jButtonRefreshMTableActionPerformed(evt);
+            }
             // Change Panel to selected user on login
             changeCard(currentSelection);
-        }
-        
-        else
-        {
+        } else {
             // Authentication failed.
             JOptionPane.showMessageDialog(null, "Authentication failed : incorrect password!");
         }
@@ -883,15 +883,13 @@ public class UI extends javax.swing.JFrame {
         if (index != -1) {
             Item item = issuer.getItemList().get(index);
             int userID = Integer.parseInt(jTextFieldSearch3.getText());
-            try
-            {
+            try {
                 try {
                     issuer.Issue(userID, item);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (SQLException ex)
-            {
+            } catch (SQLException ex) {
                 Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
