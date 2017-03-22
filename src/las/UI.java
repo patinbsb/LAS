@@ -46,7 +46,7 @@ public class UI extends javax.swing.JFrame {
         // Connect to the SQL database
         DBConnector.connect();
         //LOAD TEST DATA AND INITIALISE DATABASE
-        DBConnector.CreateAndLoadMDataIntoTable();
+        DBConnector.CreateAndLoadDataIntoTable();
 
         initComponents();
         card = (CardLayout) jPanelMain.getLayout();
