@@ -863,6 +863,7 @@ public class UI extends javax.swing.JFrame {
         try
         {
             reportsManager.getReport(jComboBox1.getSelectedIndex());
+            JOptionPane.showMessageDialog(rootPane, "Report Generated in the reports folder");
         } catch (SQLException ex)
         {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
