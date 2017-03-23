@@ -39,6 +39,7 @@ public class UI extends javax.swing.JFrame {
     // UI config
     static DefaultListModel typeModel = new DefaultListModel();
     static DefaultListModel issuerModel = new DefaultListModel();
+    static DefaultListModel externalSearchModel = new DefaultListModel();
 
     // Index of listModel
     static int currentSelection = 0;
@@ -61,6 +62,7 @@ public class UI extends javax.swing.JFrame {
         typeModel.addElement("External User");
         jListUsers.setModel(typeModel);
         jList3.setModel(issuerModel);
+        jList4.setModel(externalSearchModel);
 
         // Create a listener for when the user changes a selection in the list
         jListUsers.addListSelectionListener(new ListSelectionListener() {
@@ -781,7 +783,6 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelExternalUserLayout.createSequentialGroup()
                         .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelExternalUserLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -789,11 +790,12 @@ public class UI extends javax.swing.JFrame {
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldSearch4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonLogout4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelExternalUserLayout.createSequentialGroup()
-                        .addGap(329, 329, 329)
-                        .addComponent(jButtonSearch4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 392, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelExternalUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonLogout4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSearch4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelExternalUserLayout.setVerticalGroup(
@@ -812,7 +814,7 @@ public class UI extends javax.swing.JFrame {
                     .addGroup(jPanelExternalUserLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonLogout4))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -897,7 +899,22 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonSearch4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearch4ActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            ArrayList<Item> itemTemp = externalUser.searchItems(jTextFieldSearch4.getText(), (String) jComboBox3.getSelectedItem());
+            externalSearchModel.clear();
+            for (Item item : itemTemp)
+            {
+                externalSearchModel.addElement("Name: " + item.getTitle()
+                + ", Author: " + item.getAuthor()
+                + ", Type: " + item.getType());
+            }
+            
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButtonSearch4ActionPerformed
 
     private void jButtonIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIssueActionPerformed
