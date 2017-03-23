@@ -288,7 +288,7 @@ public class DBConnector {
         PreparedStatement pt = conn.prepareStatement(data);
         ResultSet rs = pt.executeQuery();
         while (rs.next()) {
-            table.add(new Transaction(rs.getInt("MEMBER_ID"), rs.getInt("ITEM_ID")));
+            table.add(new Transaction(rs.getInt("MEMBER_ID"), rs.getInt("ITEM_ID"), rs.getTimestamp("TRANSACTION_TIME")));
         }
 
         return table;

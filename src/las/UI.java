@@ -4,6 +4,7 @@
 package las;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -479,7 +480,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Books issued / time", "Oversubscribed items / time", "New Catalogue items / time" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Items issued / day", "Items issued / week", "Items issued / month" }));
 
         jButtonLogout1.setText("Log Out");
         jButtonLogout1.addActionListener(new java.awt.event.ActionListener()
@@ -499,7 +500,7 @@ public class UI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportsManagerLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 562, Short.MAX_VALUE)
                         .addComponent(jButtonExport))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportsManagerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -686,7 +687,7 @@ public class UI extends javax.swing.JFrame {
             .addGroup(jPanelIssuerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
                     .addGroup(jPanelIssuerLayout.createSequentialGroup()
                         .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelIssuer)
@@ -697,10 +698,8 @@ public class UI extends javax.swing.JFrame {
                             .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldSearch5, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
-                            .addGroup(jPanelIssuerLayout.createSequentialGroup()
-                                .addComponent(jLabelSelectedMember)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jTextFieldSearch5, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                            .addComponent(jLabelSelectedMember))))
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIssuerLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -861,7 +860,16 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            reportsManager.getReport(jComboBox1.getSelectedIndex());
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonExportActionPerformed
 
     private void jButtonLogout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogout1ActionPerformed

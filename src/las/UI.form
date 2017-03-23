@@ -448,7 +448,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="137" max="32767" attributes="0"/>
+                              <EmptySpace pref="562" max="32767" attributes="0"/>
                               <Component id="jButtonExport" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -500,9 +500,9 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
-                    <StringItem index="0" value="Books issued / time"/>
-                    <StringItem index="1" value="Oversubscribed items / time"/>
-                    <StringItem index="2" value="New Catalogue items / time"/>
+                    <StringItem index="0" value="Items issued / day"/>
+                    <StringItem index="1" value="Items issued / week"/>
+                    <StringItem index="2" value="Items issued / month"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -688,7 +688,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" pref="689" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="683" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelIssuer" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -701,11 +701,8 @@
                               </Group>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldSearch5" pref="451" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabelSelectedMember" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jTextFieldSearch5" pref="445" max="32767" attributes="0"/>
+                                  <Component id="jLabelSelectedMember" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
