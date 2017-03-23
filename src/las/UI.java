@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.SelectionModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -161,12 +163,13 @@ public class UI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<Item>();
         jButtonSearch3 = new javax.swing.JButton();
-        jTextFieldSearch3 = new javax.swing.JTextField();
         jButtonIssue = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<String>();
         jTextFieldSearch5 = new javax.swing.JTextField();
+        jButtonSelectMember = new javax.swing.JButton();
+        jLabelSelectedMember = new javax.swing.JLabel();
         jPanelExternalUser = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -185,7 +188,7 @@ public class UI extends javax.swing.JFrame {
 
         jListUsers.setModel(new javax.swing.AbstractListModel()
         {
-            String[] strings = { "Systen Admin", "Reports Manager", "Cataloguer", "Issuer", "External User" };
+            String[] strings = { "System Admin", "Reports Manager", "Cataloguer", "Issuer", "External User" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -618,7 +621,7 @@ public class UI extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelCataloguer, "2");
 
-        jLabelIssuer.setText("Issuee");
+        jLabelIssuer.setText("Issuee:");
 
         jButtonLogout3.setText("Log Out");
         jButtonLogout3.addActionListener(new java.awt.event.ActionListener()
@@ -650,9 +653,9 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Staff/Student ID:");
+        jLabel3.setText("Selected Member:");
 
-        jLabel4.setText("Search By:");
+        jLabel4.setText("Search Item:");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Author", "Item Type" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener()
@@ -663,6 +666,17 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jButtonSelectMember.setText("Select Member");
+        jButtonSelectMember.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonSelectMemberActionPerformed(evt);
+            }
+        });
+
+        jLabelSelectedMember.setText("None selected");
+
         javax.swing.GroupLayout jPanelIssuerLayout = new javax.swing.GroupLayout(jPanelIssuer);
         jPanelIssuer.setLayout(jPanelIssuerLayout);
         jPanelIssuerLayout.setHorizontalGroup(
@@ -670,7 +684,7 @@ public class UI extends javax.swing.JFrame {
             .addGroup(jPanelIssuerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                     .addGroup(jPanelIssuerLayout.createSequentialGroup()
                         .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelIssuer)
@@ -681,13 +695,20 @@ public class UI extends javax.swing.JFrame {
                             .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldSearch5, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(jTextFieldSearch3))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonSearch3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jTextFieldSearch5, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                            .addGroup(jPanelIssuerLayout.createSequentialGroup()
+                                .addComponent(jLabelSelectedMember)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelIssuerLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonSearch3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelIssuerLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSelectMember)))
                 .addContainerGap())
         );
         jPanelIssuerLayout.setVerticalGroup(
@@ -696,8 +717,9 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIssuer)
-                    .addComponent(jTextFieldSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jButtonSelectMember)
+                    .addComponent(jLabelSelectedMember))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSearch3)
@@ -707,7 +729,7 @@ public class UI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelIssuerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIssuerLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonLogout3))
                     .addGroup(jPanelIssuerLayout.createSequentialGroup()
@@ -882,10 +904,10 @@ public class UI extends javax.swing.JFrame {
         int index = jList3.getSelectedIndex();
         if (index != -1) {
             Item item = issuer.getItemList().get(index);
-            int userID = Integer.parseInt(jTextFieldSearch3.getText());
+            Member user = issuer.getSelectedMember();
             try {
                 try {
-                    issuer.Issue(userID, item);
+                    issuer.Issue(user, item);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1073,6 +1095,12 @@ public class UI extends javax.swing.JFrame {
         jButtonRefreshMTableActionPerformed(evt);
     }//GEN-LAST:event_jButtonClearSDetailActionPerformed
 
+    private void jButtonSelectMemberActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSelectMemberActionPerformed
+    {//GEN-HEADEREND:event_jButtonSelectMemberActionPerformed
+        issuer.selectMember();
+        jLabelSelectedMember.setText(issuer.getSelectedMember().name);
+    }//GEN-LAST:event_jButtonSelectMemberActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1135,6 +1163,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSearch2;
     private javax.swing.JButton jButtonSearch3;
     private javax.swing.JButton jButtonSearch4;
+    private javax.swing.JButton jButtonSelectMember;
     private javax.swing.JButton jButtoncClearSelection;
     private javax.swing.JCheckBox jCheckBoxEmail;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -1153,6 +1182,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelReportsManager;
     private javax.swing.JLabel jLabelSearchHint;
     private javax.swing.JLabel jLabelSearchMemberBy;
+    private javax.swing.JLabel jLabelSelectedMember;
     private javax.swing.JLabel jLabelSysAdmin;
     private javax.swing.JLabel jLabelUserHint;
     private javax.swing.JList<String> jList2;
@@ -1178,7 +1208,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JTextField jTextFieldSearch2;
-    private javax.swing.JTextField jTextFieldSearch3;
     private javax.swing.JTextField jTextFieldSearch4;
     private javax.swing.JTextField jTextFieldSearch5;
     private javax.swing.JTable mTableonSA;

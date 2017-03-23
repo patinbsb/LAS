@@ -14,42 +14,49 @@ public abstract class Search
 {
     public ArrayList<Item> searchItems(String entry, String searchType) throws SQLException
     {
-        ArrayList<Item> results = new ArrayList<>();
+        
+        ArrayList<Item> itemList = DBConnector.getItemTable();
+        ArrayList<Item> result = new ArrayList<>();
         switch (searchType)
         {
             case "Title":
-                results = ItemController.getItemByTitle(entry);
+                for(Item item : itemList)
+                {
+                    if (item.getTitle().toLowerCase().contains(entry.toLowerCase()))
+                            {
+                                result.add(item);
+                            }
+                }
                 break;
             case "Author":
-                results = ItemController.getItemByAuthor(entry);
+                for (Item item : itemList)
+                {
+                    if (item.getAuthor().toLowerCase().contains(entry.toLowerCase()))
+                    {
+                        result.add(item);
+                    }
+                }
                 break;
             case "Item Type":
-                results = ItemController.getItemByType(entry);
+                for (Item item : itemList)
+                {
+                    if (item.getType().toLowerCase().contains(entry.toLowerCase()))
+                    {
+                        result.add(item);
+                    }
+                }
                 break;
             default:
                 throw new IndexOutOfBoundsException("Search is not of type: "
                 + "Title, Author or Item Type");
         }
-        return results;
-    }
-    
-    public ArrayList<Member> searchMemberByName(String name)
-    {
-        ArrayList<Member> memberResults = MemberController.getMemberByName(name);
-        return memberResults;
+        return result;
     }
     
     public Member searchMemberByID(int ID) throws SQLException, ClassNotFoundException
     {
-        ArrayList<Member> memberList = DBConnector.getMemberTableIntoList();
-        for (Member member : memberList)
-        {
-            if (member.getID() == ID)
-            {
-                return member;
-            }
-        }
-        return null;
+        Member result = MemberController.getMemberByID(ID);
+        return result;
     }
     
     public Source getSourceByID(int ID)

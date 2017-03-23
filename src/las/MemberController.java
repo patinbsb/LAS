@@ -96,7 +96,6 @@ public class MemberController {
         }
     }
 
-    //Could get rid of this since provided a function call searchMember
     public static Member getMemberByID(int ID) {
         for (Member member : memberList) {
             if (member.getID() == ID) {
@@ -104,17 +103,6 @@ public class MemberController {
             }
         }
         return null;
-    }
-
-    //Could get rid of this since provided a function call searchMember
-    public static ArrayList<Member> getMemberByName(String name) {
-        ArrayList<Member> results = new ArrayList<>();
-        for (Member member : memberList) {
-            if (member.getName().equals(name)) {
-                results.add(member);
-            }
-        }
-        return results;
     }
 
     public static ArrayList<Member> searchMember(String keyword, String searchType) {
@@ -129,17 +117,17 @@ public class MemberController {
                         }
                         break;
                     case "Name":
-                        if (m.getName().contains(keyword)) {
+                        if (m.getName().toLowerCase().contains(keyword.toLowerCase())) {
                             storedData.add(m);
                         }
                         break;
                     case "Email":
-                        if (m.getEmail().contains(keyword)) {
+                        if (m.getEmail().toLowerCase().contains(keyword.toLowerCase())) {
                             storedData.add(m);
                         }
                         break;
                     case "Privilege":
-                        if (m.getPrivilege().contains(keyword)) {
+                        if (m.getPrivilege().toLowerCase().contains(keyword.toLowerCase())) {
                             storedData.add(m);
                         }
                         break;

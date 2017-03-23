@@ -17,6 +17,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -299,7 +300,14 @@ public class DBConnector {
         PreparedStatement pt = conn.prepareStatement(data);
         pt.setInt(1, transaction.getMemberID());
         pt.setInt(2, transaction.getItemID());
-        pt.executeUpdate();
+        try
+        {
+            pt.executeUpdate();
+        } catch (Exception DerbySQLIntegrityConstraintViolationException)
+        {
+            JOptionPane.showMessageDialog(null, "Cannot Issue an item a member already owns!");
+        }
+
     }
 
     public static void removeTransactionFromTable(Transaction transaction) throws SQLException {

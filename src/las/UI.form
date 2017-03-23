@@ -107,7 +107,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="5">
-                        <StringItem index="0" value="Systen Admin"/>
+                        <StringItem index="0" value="System Admin"/>
                         <StringItem index="1" value="Reports Manager"/>
                         <StringItem index="2" value="Cataloguer"/>
                         <StringItem index="3" value="Issuer"/>
@@ -688,7 +688,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="689" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelIssuer" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -701,16 +701,27 @@
                               </Group>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldSearch5" pref="85" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldSearch3" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldSearch5" pref="451" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabelSelectedMember" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonSearch3" max="32767" attributes="0"/>
-                          <Component id="jButtonLogout3" max="32767" attributes="0"/>
-                          <Component id="jButtonIssue" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jButtonSearch3" max="32767" attributes="0"/>
+                                  <Component id="jButtonLogout3" max="32767" attributes="0"/>
+                                  <Component id="jButtonIssue" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonSelectMember" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -722,8 +733,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelIssuer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldSearch3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonSelectMember" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelSelectedMember" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -735,7 +747,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jScrollPane4" pref="258" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="561" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonLogout3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -752,7 +764,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelIssuer">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Issuee"/>
+                <Property name="text" type="java.lang.String" value="Issuee:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonLogout3">
@@ -791,8 +803,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSearch3ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldSearch3">
-            </Component>
             <Component class="javax.swing.JButton" name="jButtonIssue">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Issue Item(s)"/>
@@ -803,12 +813,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Staff/Student ID:"/>
+                <Property name="text" type="java.lang.String" value="Selected Member:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search By:"/>
+                <Property name="text" type="java.lang.String" value="Search Item:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox4">
@@ -829,6 +839,19 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldSearch5">
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonSelectMember">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Select Member"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectMemberActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelSelectedMember">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="None selected"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
