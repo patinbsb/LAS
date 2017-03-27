@@ -1,5 +1,5 @@
 /*
- *
+ * Provides methods for the Issuer actor.
  */
 package las;
 

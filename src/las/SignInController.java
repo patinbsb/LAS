@@ -21,7 +21,6 @@ public class SignInController {
     }
 
     public boolean Authenticate() {
-        //TODO Load passwords from user config file?
 
         switch (userType) {
             case 0:

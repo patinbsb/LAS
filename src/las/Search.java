@@ -58,14 +58,4 @@ public abstract class Search
         Member result = MemberController.getMemberByID(ID);
         return result;
     }
-    
-    public Source getSourceByID(int ID)
-    {
-        Source result = new Source();
-        // TODO implement this method
-        // Connect to Bibliographic system
-        // Perform search
-        // result = Biblio.getSourceByID(ID)
-        return result;
-    }
 }

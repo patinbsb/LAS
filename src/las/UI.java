@@ -32,10 +32,10 @@ public class UI extends javax.swing.JFrame {
      * Creates new form UI
      */
     // Object declaration
-    Cataloguer cataloguer = new Cataloguer();
     ExternalUser externalUser = new ExternalUser();
     Issuer issuer = new Issuer();
     ReportsManager reportsManager = new ReportsManager();
+    Cataloguer cataloguer = new Cataloguer();
 
     // UI config
     static DefaultListModel typeModel = new DefaultListModel();
@@ -962,7 +962,6 @@ public class UI extends javax.swing.JFrame {
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox4ActionPerformed
     {//GEN-HEADEREND:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButtonAddMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMemberActionPerformed
@@ -1002,7 +1001,6 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddMemberActionPerformed
 
     private void jButtonRemoveMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMemberActionPerformed
-        // TODO add your handling code here:
         DefaultTableModel mTable = (DefaultTableModel) mTableonSA.getModel();
         Object[] Data = new Object[5];
         Data[0] = mTable.getValueAt(mTableonSA.getSelectedRow(), 0);
@@ -1024,7 +1022,6 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRemoveMemberActionPerformed
 
     private void jButtonChangePrivilegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePrivilegeActionPerformed
-        // TODO add your handling code here:
         int mID = Integer.parseInt(mTableonSA.getValueAt(mTableonSA.getSelectedRow(), 0).toString());
         String pri = mTableonSA.getValueAt(mTableonSA.getSelectedRow(), 3).toString();
         boolean isStaff = false;
